@@ -25,6 +25,7 @@ Use Case Name:
 \##Alternate Trigger
 
 \###Alternate Postconditions
+<<<<<<< HEAD
 Use Case Name:Find text in fils
 \## having a search a bar that allows user to input a word or series of alphabets to allow user to go straight to that specific note for review
 
@@ -37,3 +38,17 @@ Use Case Name:Track hours worked per day
 Use Case Name: Visualize hours worked and projects
 \##showing time blocks in the calendar form which the user will in month-by-month basis which will show the hours worked and project title named in that day of the month.
 \##
+=======
+
+
+Use Case Name: input a Markdown file and output Flashcards 
+Flashcards is powerful tool to provide efficient memorizing for all updates and information need to be memorized and fast way to take notes, create 
+content and produce PDF to print.
+
+Use Case Name: Share PDF cards add to their accounts
+Make printable flashcards as PDF file, create online flashcards, share a link or send to accounts digitally to refer when need it.
+
+Use Case Name: Render Markdown notes 
+Share markdown notes by creating GitHub repository, push the notes (file.md) to GitHub.
+
+>>>>>>> b9494a63afdb16d33e85928d8e337ee61c6ac090
