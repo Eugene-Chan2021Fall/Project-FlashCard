@@ -11,11 +11,11 @@
 
 **Preconditions**: students log in 
 
-**Triggers**: students start inputting their information regarding their schedule, time slots >>>>>>>>>>>>>>allocated for each tasks and important concepts to remember 
+**Triggers**: students start inputting their information regarding their schedule, time slots allocated for each tasks and important concepts to remember 
 
 **Primary Sequence**
    1. prompt the user to enter schedule, time slots for these particular tasks
-   2. prompt the user to write the important concepts and allow them to write the important     >>>>>>answers behind the card with ability to flip the card
+   2. prompt the user to write the important concepts and allow them to write the important     answers behind the card with ability to flip the card
 
 Primary Postconditions
 
@@ -27,14 +27,14 @@ Alternate Postconditions
 
 
 Use Case #1 Name: input a Markdown file and output Flashcards 
-Flashcards is powerful tool to provide efficient memorizing for all updates and information need to be memorized and fast way to take notes, create 
+ - Flashcards is powerful tool to provide efficient memorizing for all updates and information need to be memorized and fast way to take notes, create 
 content and produce PDF to print.
 
 Use Case #2 Name: Share PDF cards add to their accounts
-Make printable flashcards as PDF file, create online flashcards, share a link or send to accounts digitally to refer when need it.
+ - Make printable flashcards as PDF file, create online flashcards, share a link or send to accounts digitally to refer when need it.
 
 Use Case #3 Name: Render Markdown notes 
-Share markdown notes by creating GitHub repository, push the notes (file.md) to GitHub.
+ - Share markdown notes by creating GitHub repository, push the notes (file.md) to GitHub.
 
 Use Case #4 Name:Find text in files
  - having a search a bar that allows user to input a word or series of alphabets to allow user to go straight to that specific note for review
