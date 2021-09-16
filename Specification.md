@@ -20,14 +20,18 @@ https://github.com/Eugene-Chan2021Fall/Project-FlashCard
    1. prompt the user to enter schedule, time slots for these particular tasks
    2. prompt the user to write the important concepts and allow them to write the important     answers behind the card with ability to flip the card
    3. user will bet setting the time slots and the pomodoro timer for their tasks that is set in the calender
+
 **Primary Postconditions**
 -  customer will receive an illustration of tasks, timer and 
+
 **Alternate Sequences**
   1. user entered invalid inputs
     - display an error message to the user
     - prompt the user to reenter again
+
 **Alternate Trigger**
 - click on the daily reminder when it appeared in the notifications bar of your device
+
 **Alternate Postconditions**
 - Not applicable
 
