@@ -2,7 +2,7 @@ https://github.com/Eugene-Chan2021Fall/Project-FlashCard
 
 **Date**: September 14,2021
 
-**Product name**:Study Helper ![This is an image](https://www.anyrgb.com/en-clipart-ylbmw)
+**Product name**:Study Helper 
 
 **Members: **Eugene Chan, Shehab Alnaimi, Seyoung Oh, William Nguyen
 
