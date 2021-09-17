@@ -40,13 +40,123 @@ https://github.com/Eugene-Chan2021Fall/Project-FlashCard
  - Flashcards is powerful tool to provide efficient memorizing for all updates and information need to be memorized and fast way to take notes, create 
 content and produce PDF to print.
 
+\##Actors
+
+- System
+
+##Preconditions
+
+- Markdown file ready to convert
+
+##Triggers
+
+- System use online converter to converter
+
+##Primary Sequence
+
+1- Use online converter to convert markdown file to pdf flash cards
+2- Flash cards saved in the System and ready to use 
+
+##Primary Postconditions
+
+System update Flash cards ready to use
+
+## Alternate Sequences
+
+Error converting to pdf Flash cards 
+
+##Alternate Trigger
+
+- Fix the Error / convert again
+
+##Alternate Postconditions
+
+- Markdown file failed convert to pdf Flash cards 
+  
 **Use Case #2 Name:** Share PDF cards add to their accounts
 
  - Make printable flashcards as PDF file, create online flashcards, share a link or send to accounts digitally to refer when need it.
 
+##Actors
+
+1- User
+2- System
+
+##Preconditions
+
+1- pdf Flash cards created and ready to to share 
+2- log in to the system
+3- Accounts to share with
+
+##Triggers
+
+- Use system to share pdf Flash cards with their accounts 
+
+##Primary Sequence
+
+1- Prompt the system to share pdf Flash cards with users accounts 
+2- Account user able to access pdf cards 
+3- Select account users to share pdf cards with
+4- Sharew pdf cards wit hprefered accounts 
+
+##Primary Postconditions
+
+1- Account users have access to pdf cards 
+2- Able to use pdf cards
+
+## Alternate Sequences
+
+1- Accounts are not exist 
+2- System gives error message Fail to share pdf cards 
+3- System prompt to use exist or valid  accounts
+
+##Alternate Trigger
+
+Use valid or exist accounts
+
+##Alternate Postconditions
+
+Failed to share pdf with their accounts
+ 
 **Use Case #3 Name:** Render Markdown notes 
 
  - Share markdown notes by creating GitHub repository, push the notes (file.md) to GitHub.
+
+##Actors
+
+1- users
+2- System
+
+##Preconditions
+
+- Markdown notes created and ready 
+- use app or online tool to render the markdown notes into HTML or pdf 
+- Github repository created and ready or APP ready to recieve the notes
+
+##Triggers
+
+- Use render app or any online tools to render the markdown notes then push into Github or to the APP
+
+##Primary Sequence
+
+1- Choose App or online tool to render text into HTML or pdf
+2- convert the sample text edited to HTML or pdf b 
+
+##Primary Postconditions
+
+- Markdown notes rendered to the new format HTML or PDt 
+
+## Alternate Sequences
+
+- Fail to render text into new format 
+
+##Alternate Trigger
+
+- Fix the error or use different tool
+
+##Alternate Postconditions
+
+- Fail to to render the markdown notes
 
 **Use Case #4 Name:** Find text in files
 
