@@ -4,7 +4,7 @@ https://github.com/Eugene-Chan2021Fall/Project-FlashCard
 
 **Product name**:Study Helper 
 
-**Members: **Eugene Chan, Shehab Alnaimi, Seyoung Oh, William Nguyen**
+**Members:** Eugene Chan, Shehab Alnaimi, Seyoung Oh, William Nguyen
 
 **Problem Statement**:To help students who are not able to study effectively
 
