@@ -30,7 +30,7 @@ content and produce PDF to print.
 \##Actors
 
 \##Triggers
-D
+
 \##Actors
 
 - System
@@ -45,14 +45,14 @@ D
 
 ##Primary Sequence
 
-1- Use online converter to convert markdown file to pdf flash cards
-2- Flash cards saved in the System and ready to use 
+1. Use online converter to convert markdown file to pdf flash cards
+2. Flash cards saved in the System and ready to use 
 
 ##Primary Postconditions
 
 System update Flash cards ready to use
 
-## Alternate Sequences
+\##Alternate Sequences
 
 Error converting to pdf Flash cards 
 
@@ -64,7 +64,7 @@ Error converting to pdf Flash cards
 
 - Markdown file failed convert to pdf Flash cards 
   
-**Use Case #2 Name:** Share PDF cards add to their accounts
+**Use Case #3 Name:** Share PDF cards add to their accounts
 
 \##Primary Sequence
 
@@ -73,74 +73,74 @@ Error converting to pdf Flash cards
 
 ##Actors
 
-1- User
-2- System
+1. User
+2. System
 
-##Preconditions
+\##Preconditions
 
-1- pdf Flash cards created and ready to to share 
-2- log in to the system
-3- Accounts to share with
+1. pdf Flash cards created and ready to to share 
+2. log in to the system
+3. Accounts to share with
 
-##Triggers
+\##Triggers
 
 - Use system to share pdf Flash cards with their accounts 
 
-##Primary Sequence
+\##Primary Sequence
 
-1- Prompt the system to share pdf Flash cards with users accounts 
-2- Account user able to access pdf cards 
-3- Select account users to share pdf cards with
-4- Sharew pdf cards wit hprefered accounts 
+ 1. Prompt the system to share pdf Flash cards with users accounts 
+ 2. Account user able to access pdf cards 
+ 3. select account users to share pdf cards with
+ 4. Share pdf cards with shared accounts 
 
 ##Primary Postconditions
 
-1- Account users have access to pdf cards 
-2- Able to use pdf cards
+1. Account users have access to pdf cards 
+2. Able to use pdf cards
 
-## Alternate Sequences
+\## Alternate Sequences
 
-1- Accounts are not exist 
-2- System gives error message Fail to share pdf cards 
-3- System prompt to use exist or valid  accounts
+1. Accounts are not exist 
+2. System gives error message Fail to share pdf cards 
+3. System prompt to use exist or valid  accounts
 
-##Alternate Trigger
+\##Alternate Trigger
 
 Use valid or exist accounts
 
-##Alternate Postconditions
+\##Alternate Postconditions
 
 Failed to share pdf with their accounts
  
-**Use Case #3 Name:** Render Markdown notes 
+**Use Case #4 Name:** Render Markdown notes 
 
  - Share markdown notes by creating GitHub repository, push the notes (file.md) to GitHub.
-D
-##Actors
 
-1- users
-2- System
+\##Actors
 
-##Preconditions
+1. users
+2. System
+
+\##Preconditions
 
 - Markdown notes created and ready 
 - use app or online tool to render the markdown notes into HTML or pdf 
 - Github repository created and ready or APP ready to recieve the notes
 
-##Triggers
+\##Triggers
 
 - Use render app or any online tools to render the markdown notes then push into Github or to the APP
 
-##Primary Sequence
+\##Primary Sequence
 
-1- Choose App or online tool to render text into HTML or pdf
-2- convert the sample text edited to HTML or pdf b 
+1. Choose App or online tool to render text into HTML or pdf
+2. convert the sample text edited to HTML or pdf b 
 
-##Primary Postconditions
+\##Primary Postconditions
 
 - Markdown notes rendered to the new format HTML or PDt 
 
-## Alternate Sequences
+\## Alternate Sequences
 
 - Fail to render text into new format 
 
@@ -151,7 +151,7 @@ D
 ##Alternate Postconditions
 
 - Fail to to render the markdown notes
-=
+
 \##Actors
 
 \##Triggers
@@ -160,56 +160,73 @@ D
 
 \##Primary Postconditions6
 
-**Use Case #4 Name:** Find text in files
+**Use Case #5 Name:** Find text in files
 
  - having a search a bar that allows user to input a word or series of alphabets to allow user to go straight to that specific note for review
 
-\##Actors
+\##Actors: user
 
 \##Triggers
+* by clicking on the search bar button which is placed at the top of application within the files section of it
 
 \##Primary Sequence
+1. users get into the notes section 
+2. users will type word or alphabets into the empty search bar which will highlight the keywords needed to be found
+3. it will illuminate the which part of the scrollbar at the side of the file to pin point where patterns can be found
 
 \##Primary Postconditions
+- the highlighted areas will be shown on the respective file once search bar button is clicked
 
 
-**Use Case #5 Name:** Quickly rename files using regular expressions
+**Use Case #6 Name:** Quickly rename files using regular expressions
 
  - showing a menu and have the files settings button to change the name of the file using regular expression if the user want to change it later on
-\##Actors
+\##Actors: users
 
-\##Triggers
+\##Triggers: users
 
 \##Primary Sequence
+ 1. select the notes section of the application
+ 2. allow user to change the name of the file by clicking the edit button
+ 3. confirmation window will pop out and user agreed with it to edit the name of the file
 
 \##Primary Postconditions
+1. name of the file changed after clicking the edit button at the side of the file
 
 
-**Use Case #6 Name:** Track hours worked per day
+**Use Case #7 Name:** Track hours worked per day
 
  - showing a track record of the hours worked once the "START" button is clicked and the timer should be counting therefore accumulating number of hours each day
-\##Actors
+\##Actors: users
 
-\##Triggers
+\##Triggers:
+ - a side panel where hours worked will be stored in there and can be accessed through swiping from left side of the screen to the right
 
 \##Primary Sequence
+ 1. click the homepage button
+ 2. slide the timer panel from left to right to get into the page of timer
+ 3. click "START" button to run the timer to track down hours that the user worked 
 
 \##Primary Postconditions
+ - hours data is collected
 
-
-**Use Case #7 Name:** Visualize hours worked and projects
+**Use Case #8 Name:** Visualize hours worked and projects
 
  - showing time blocks in the calendar form which the user will in month-by-month basis which will show the hours worked and project title named in that day of the month.
-\##Actors
+
+\##Actors: users
 
 \##Triggers
+ * clicking on the home button once logged into the application
 
 \##Primary Sequence
+ 1. click home button which brings the user to the homepage which will laid out with information about tasks completed, pomodoro timer and the calendar
 
 \##Primary Postconditions
+ - the user will see amount of hours worked and projects within the homepage of the Student Helper application
+ 
 
-
-**Use Case #8 Name:** Convert Markdown to PDF
+**Use Case #9 Name:** Convert Markdown to PDF
 
 * Ability to convert markdown notes to a pdf file. 
 
@@ -247,7 +264,7 @@ User selects button to convert markdown file to pdf.
 
 * User does not recieve a converted pdf file
 
-**Use Case #9 Name:** Share notes with other users
+**Use Case #10 Name:** Share notes with other users
 
 * Users can send notes from their portal directly to other users.
 
@@ -290,7 +307,7 @@ User presses the share button that is located next to the desired file.
 * Recipient does not recieve notes.
   * Recipient displays an error message.
 
-**Use Case #10 Name:** Create time blocks
+**Use Case #11 Name:** Create time blocks
 
 * Users can create time block schedules to help with their time managment. 
 
@@ -330,7 +347,7 @@ Users press the create time block schedule button.
 
 * Time block schedule could not be saved to portal due to invalid inputs.
 
-**Use Case #11 Name:** Use pomodoro timer
+**Use Case #12 Name:** Use pomodoro timer
 
 * A timer that lets users manage their break time between study sessions. 
 
@@ -377,7 +394,7 @@ Has to press the pomodoro timer button.
 * User stops the timer
 
 
-Use Case #12 Name: Mind map of flash cads
+**Use Case #13 Name:** Mind map of flash cads
 
 - Users can create and see the mind map of flash cards
 
@@ -414,7 +431,7 @@ Use Case #12 Name: Mind map of flash cads
 - If there is no flash card, users have to create flash card first.
 
 
-Use Case #13 Name: Change order of flash cards basd on how often user got answer correct
+**Use Case #14 Name:** Change order of flash cards basd on how often user got answer correct
 
 - User can study more what he didn't get answer correct
 
@@ -451,7 +468,7 @@ Use Case #13 Name: Change order of flash cards basd on how often user got answer
   - Displays error message
 
 
-Use Case #14 Name: Create pdf of flash cards to print
+**Use Case #15 Name:** Create pdf of flash cards to print
 
 - User can create pdf file of flash cards that he made
 
