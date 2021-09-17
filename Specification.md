@@ -4,7 +4,7 @@ https://github.com/Eugene-Chan2021Fall/Project-FlashCard
 
 **Product name**:Study Helper 
 
-**Members: **Eugene Chan, Shehab Alnaimi, Seyoung Oh, William Nguyen
+**Members: **Eugene Chan, Shehab Alnaimi, Seyoung Oh, William Nguyen**
 
 **Problem Statement**:To help students who are not able to study effectively
 
@@ -16,58 +16,87 @@ https://github.com/Eugene-Chan2021Fall/Project-FlashCard
 
  - Flashcards is powerful tool to provide efficient memorizing for all updates and information need to be memorized and fast way to take notes, create 
 content and produce PDF to print.
-\##Actors
+\##Actors: students
+
 \##Triggers
+
 \##Primary Sequence
+
 \##Primary Postconditions
 
 **Use Case #2 Name:** Share PDF cards add to their accounts
 
  - Make printable flashcards as PDF file, create online flashcards, share a link or send to accounts digitally to refer when need it.
 \##Actors
+
 \##Triggers
+
 \##Primary Sequence
+
 \##Primary Postconditions
+
 
 **Use Case #3 Name:** Render Markdown notes 
 
  - Share markdown notes by creating GitHub repository, push the notes (file.md) to GitHub.
+
 \##Actors
+
 \##Triggers
+
 \##Primary Sequence
+
 \##Primary Postconditions
+
 
 **Use Case #4 Name:** Find text in files
 
  - having a search a bar that allows user to input a word or series of alphabets to allow user to go straight to that specific note for review
+
 \##Actors
+
 \##Triggers
+
 \##Primary Sequence
+
 \##Primary Postconditions
+
 
 **Use Case #5 Name:** Quickly rename files using regular expressions
 
  - showing a menu and have the files settings button to change the name of the file using regular expression if the user want to change it later on
 \##Actors
+
 \##Triggers
+
 \##Primary Sequence
+
 \##Primary Postconditions
+
 
 **Use Case #6 Name:** Track hours worked per day
 
  - showing a track record of the hours worked once the "START" button is clicked and the timer should be counting therefore accumulating number of hours each day
 \##Actors
+
 \##Triggers
+
 \##Primary Sequence
+
 \##Primary Postconditions
+
 
 **Use Case #7 Name:** Visualize hours worked and projects
 
  - showing time blocks in the calendar form which the user will in month-by-month basis which will show the hours worked and project title named in that day of the month.
 \##Actors
+
 \##Triggers
+
 \##Primary Sequence
+
 \##Primary Postconditions
+
 
 **Use Case #8 Name:** Convert Markdown to PDF
 
