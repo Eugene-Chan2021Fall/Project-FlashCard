@@ -4,42 +4,33 @@ https://github.com/Eugene-Chan2021Fall/Project-FlashCard
 
 **Product name**:Study Helper 
 
-**Members: **Eugene Chan, Shehab Alnaimi, Seyoung Oh, William Nguyen
+**Members:** Eugene Chan, Shehab Alnaimi, Seyoung Oh, William Nguyen
 
 **Problem Statement**:To help students who are not able to study effectively
 
 **Non-functional Requirements**:able to support English and Spanish, support Windows, Mac OS and Android systems; dark mode and light mode
 
-**Actors**: students
 
-**Preconditions**: students log in 
-
-**Triggers**: students start inputting their information regarding their schedule, time slots allocated for each tasks and important concepts to remember 
-
-**Primary Sequence**
-   1. prompt the user to enter schedule, time slots for these particular tasks
-   2. prompt the user to write the important concepts and allow them to write the important     answers behind the card with ability to flip the card
-   3. user will bet setting the time slots and the pomodoro timer for their tasks that is set in the calender
-
-**Primary Postconditions**
--  customer will receive an illustration of tasks, timer and 
-
-**Alternate Sequences**
-  1. user entered invalid inputs
-    - display an error message to the user
-    - prompt the user to reenter again
-
-**Alternate Trigger**
-- click on the daily reminder when it appeared in the notifications bar of your device
-
-**Alternate Postconditions**
-- Not applicable
 
 **Use Case #1 Name:** input a Markdown file and output Flashcards 
 
  - Flashcards is powerful tool to provide efficient memorizing for all updates and information need to be memorized and fast way to take notes, create 
 content and produce PDF to print.
+\##Actors: students
 
+\##Triggers
+
+\##Primary Sequence
+
+\##Primary Postconditions
+
+**Use Case #2 Name:** Share PDF cards add to their accounts
+
+ - Make printable flashcards as PDF file, create online flashcards, share a link or send to accounts digitally to refer when need it.
+\##Actors
+
+\##Triggers
+D
 \##Actors
 
 - System
@@ -75,7 +66,10 @@ Error converting to pdf Flash cards
   
 **Use Case #2 Name:** Share PDF cards add to their accounts
 
- - Make printable flashcards as PDF file, create online flashcards, share a link or send to accounts digitally to refer when need it.
+\##Primary Sequence
+
+\##Primary Postconditions6
+
 
 ##Actors
 
@@ -121,7 +115,7 @@ Failed to share pdf with their accounts
 **Use Case #3 Name:** Render Markdown notes 
 
  - Share markdown notes by creating GitHub repository, push the notes (file.md) to GitHub.
-
+D
 ##Actors
 
 1- users
@@ -157,22 +151,63 @@ Failed to share pdf with their accounts
 ##Alternate Postconditions
 
 - Fail to to render the markdown notes
+=
+\##Actors
+
+\##Triggers
+
+\##Primary Sequence
+
+\##Primary Postconditions6
 
 **Use Case #4 Name:** Find text in files
 
  - having a search a bar that allows user to input a word or series of alphabets to allow user to go straight to that specific note for review
 
+\##Actors
+
+\##Triggers
+
+\##Primary Sequence
+
+\##Primary Postconditions
+
+
 **Use Case #5 Name:** Quickly rename files using regular expressions
 
  - showing a menu and have the files settings button to change the name of the file using regular expression if the user want to change it later on
+\##Actors
+
+\##Triggers
+
+\##Primary Sequence
+
+\##Primary Postconditions
+
 
 **Use Case #6 Name:** Track hours worked per day
 
  - showing a track record of the hours worked once the "START" button is clicked and the timer should be counting therefore accumulating number of hours each day
+\##Actors
+
+\##Triggers
+
+\##Primary Sequence
+
+\##Primary Postconditions
+
 
 **Use Case #7 Name:** Visualize hours worked and projects
 
  - showing time blocks in the calendar form which the user will in month-by-month basis which will show the hours worked and project title named in that day of the month.
+\##Actors
+
+\##Triggers
+
+\##Primary Sequence
+
+\##Primary Postconditions
+
 
 **Use Case #8 Name:** Convert Markdown to PDF
 
