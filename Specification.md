@@ -16,18 +16,30 @@ https://github.com/Eugene-Chan2021Fall/Project-FlashCard
 
  - Flashcards is powerful tool to provide efficient memorizing for all updates and information need to be memorized and fast way to take notes, create 
 content and produce PDF to print.
-\##Actors: students
+
+\##Actors:
+- system
+
+\##Preconditions
+- Markdown file ready to convert
 
 \##Triggers
+- System use online converter to convert
 
 \##Primary Sequence
+1. use online converter to convert markdown file to pdf flash cards
+2. flash cards saved within the system and ready to use
 
 \##Primary Postconditions
+- system update and flash card ready to use
+
 
 **Use Case #2 Name:** Share PDF cards add to their accounts
+- make printable flashcards as PDF file, create online flashcards, share a link or send to accounts digitally to refer when needs it
 
- - Make printable flashcards as PDF file, create online flashcards, share a link or send to accounts digitally to refer when need it.
 \##Actors
+- user
+- system
 
 \##Triggers
 
@@ -36,8 +48,9 @@ content and produce PDF to print.
 - System
 
 ##Preconditions
-
-- Markdown file ready to convert
+- log into the system
+- pdf Flash cards created and ready to share
+- accounts to share with
 
 ##Triggers
 
@@ -45,74 +58,33 @@ content and produce PDF to print.
 
 ##Primary Sequence
 
-1. Use online converter to convert markdown file to pdf flash cards
-2. Flash cards saved in the System and ready to use 
-
-##Primary Postconditions
-
-System update Flash cards ready to use
-
-\##Alternate Sequences
-
-Error converting to pdf Flash cards 
-
-##Alternate Trigger
-
-- Fix the Error / convert again
-
-##Alternate Postconditions
-
-- Markdown file failed convert to pdf Flash cards 
-  
-**Use Case #3 Name:** Share PDF cards add to their accounts
-
-\##Primary Sequence
-
-\##Primary Postconditions6
-
-
-##Actors
-
-1. User
-2. System
-
-\##Preconditions
-
-1. pdf Flash cards created and ready to to share 
-2. log in to the system
-3. Accounts to share with
-
-\##Triggers
-
-- Use system to share pdf Flash cards with their accounts 
-
-\##Primary Sequence
-
- 1. Prompt the system to share pdf Flash cards with users accounts 
+ 1. prompt the system to share pdf Flash cards with users accounts 
  2. Account user able to access pdf cards 
  3. select account users to share pdf cards with
  4. Share pdf cards with shared accounts 
-
+ 
 ##Primary Postconditions
-
 1. Account users have access to pdf cards 
 2. Able to use pdf cards
 
-\## Alternate Sequences
+
+\##Alternate Sequences
 
 1. Accounts are not exist 
 2. System gives error message Fail to share pdf cards 
 3. System prompt to use exist or valid  accounts
 
-\##Alternate Trigger
+##Alternate Trigger
 
-Use valid or exist accounts
+- use valid or exist accounts
 
-\##Alternate Postconditions
+##Alternate Postconditions
 
-Failed to share pdf with their accounts
+- failed to share pdf with their accounts 
+  
+
  
-**Use Case #4 Name:** Render Markdown notes 
+**Use Case #3 Name:** Render Markdown notes 
 
  - Share markdown notes by creating GitHub repository, push the notes (file.md) to GitHub.
 
@@ -152,15 +124,8 @@ Failed to share pdf with their accounts
 
 - Fail to to render the markdown notes
 
-\##Actors
 
-\##Triggers
-
-\##Primary Sequence
-
-\##Primary Postconditions6
-
-**Use Case #5 Name:** Find text in files
+**Use Case #4 Name:** Find text in files
 
  - having a search a bar that allows user to input a word or series of alphabets to allow user to go straight to that specific note for review
 
@@ -178,7 +143,7 @@ Failed to share pdf with their accounts
 - the highlighted areas will be shown on the respective file once search bar button is clicked
 
 
-**Use Case #6 Name:** Quickly rename files using regular expressions
+**Use Case #5 Name:** Quickly rename files using regular expressions
 
  - showing a menu and have the files settings button to change the name of the file using regular expression if the user want to change it later on
 \##Actors: users
@@ -194,7 +159,7 @@ Failed to share pdf with their accounts
 1. name of the file changed after clicking the edit button at the side of the file
 
 
-**Use Case #7 Name:** Track hours worked per day
+**Use Case #6 Name:** Track hours worked per day
 
  - showing a track record of the hours worked once the "START" button is clicked and the timer should be counting therefore accumulating number of hours each day
 \##Actors: users
@@ -210,7 +175,7 @@ Failed to share pdf with their accounts
 \##Primary Postconditions
  - hours data is collected
 
-**Use Case #8 Name:** Visualize hours worked and projects
+**Use Case #7 Name:** Visualize hours worked and projects
 
  - showing time blocks in the calendar form which the user will in month-by-month basis which will show the hours worked and project title named in that day of the month.
 
@@ -226,7 +191,7 @@ Failed to share pdf with their accounts
  - the user will see amount of hours worked and projects within the homepage of the Student Helper application
  
 
-**Use Case #9 Name:** Convert Markdown to PDF
+**Use Case #8 Name:** Convert Markdown to PDF
 
 * Ability to convert markdown notes to a pdf file. 
 
@@ -264,7 +229,7 @@ User selects button to convert markdown file to pdf.
 
 * User does not recieve a converted pdf file
 
-**Use Case #10 Name:** Share notes with other users
+**Use Case #9 Name:** Share notes with other users
 
 * Users can send notes from their portal directly to other users.
 
@@ -307,7 +272,7 @@ User presses the share button that is located next to the desired file.
 * Recipient does not recieve notes.
   * Recipient displays an error message.
 
-**Use Case #11 Name:** Create time blocks
+**Use Case #10 Name:** Create time blocks
 
 * Users can create time block schedules to help with their time managment. 
 
@@ -347,7 +312,7 @@ Users press the create time block schedule button.
 
 * Time block schedule could not be saved to portal due to invalid inputs.
 
-**Use Case #12 Name:** Use pomodoro timer
+**Use Case #11 Name:** Use pomodoro timer
 
 * A timer that lets users manage their break time between study sessions. 
 
@@ -394,7 +359,7 @@ Has to press the pomodoro timer button.
 * User stops the timer
 
 
-**Use Case #13 Name:** Mind map of flash cads
+**Use Case #12 Name:** Mind map of flash cads
 
 - Users can create and see the mind map of flash cards
 
@@ -431,7 +396,7 @@ Has to press the pomodoro timer button.
 - If there is no flash card, users have to create flash card first.
 
 
-**Use Case #14 Name:** Change order of flash cards basd on how often user got answer correct
+**Use Case #13 Name:** Change order of flash cards basd on how often user got answer correct
 
 - User can study more what he didn't get answer correct
 
@@ -468,7 +433,7 @@ Has to press the pomodoro timer button.
   - Displays error message
 
 
-**Use Case #15 Name:** Create pdf of flash cards to print
+**Use Case #14 Name:** Create pdf of flash cards to print
 
 - User can create pdf file of flash cards that he made
 
@@ -504,3 +469,39 @@ Has to press the pomodoro timer button.
 \###Alternate Postconditions
 
 - There can be error message if there is no flash card to change to PDF
+
+**Use Case #15 name:** Add todo tracker
+- able to track the each task completed once user inputted all the relevant information into the tracker feature
+
+\##Actors
+- user
+- system
+
+\##Preconditions
+- tasks needed to be inputted
+
+\##Triggers
+- todo tracker button clicked start
+
+\##Primary Sequence
+
+1. user will navigate to todo tracker button
+2. user click on the todo tracker button
+3. input relevant task information and start task
+
+
+\##Primary Postconditions
+
+- the tasks will be completed once the user clicked the finish button
+
+- the tasked will be strikethrough
+
+\## Alternate Sequences
+
+- user has not click finish button for the task
+- application will alarmed and next tasks note will pop up as notification
+- user has to click the finish button to disarm to alarm sound after 30 seconds has passed from the previous task now moving on to the next tasks
+
+\###Alternate Postconditions
+
+- the tasks will remind the user move on to the next tasks once the allocated time has passed
