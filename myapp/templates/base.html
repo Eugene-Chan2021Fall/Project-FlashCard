@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+	<h1>Study Helper</h1>
+    </head>
+    <body>
+	{% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for m in messages %}
+            <li>{{ m }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+	{% block content %}
+	{% endblock %}
+    </body>
+</html>
+
