@@ -8,6 +8,9 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 @myapp_obj.route("/")
 def home():
+    if current_user.is_authenticated:
+        name = User.query.get(current_user.get_id()).username
+        return render_template("user_home.html", name = name)
     return render_template("home.html")
 
 @myapp_obj.route("/login", methods=['GET', 'POST'])
@@ -20,17 +23,28 @@ def login():
             return redirect("/login")
         else:
             login_user(user, remember=form.remember_me.data)
-            flash(f'Welcome {user.username}!')
             return redirect("/")
     return render_template("login.html", form = form)
+
+@myapp_obj.route("/logout")
+def logout():
+    logout_user()
+    return redirect("/")
 
 @myapp_obj.route("/signup", methods=['GET', 'POST'])
 def signup():
     form = SignupForm()
     if form.validate_on_submit():
-        user = User(username = form.username.data, email = form.email.data)
-        user.set_password(form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        flash(f'{user} added to the database.')
+        checkName = User.query.filter_by(username = form.username.data).first()
+        checkEmail = User.query.filter_by(email = form.email.data).first()
+        if checkName is not None:
+            flash('Username already taken')
+        elif checkEmail is not None:
+            flash('Email already in use')
+        else:
+            user = User(username = form.username.data, email = form.email.data)
+            user.set_password(form.password.data)
+            db.session.add(user)
+            db.session.commit()
+            flash('Registration successful')
     return render_template("signup.html", form = form)
