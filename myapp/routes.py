@@ -6,6 +6,8 @@ from myapp import db
 from myapp.models import User
 from flask_login import current_user, login_user, logout_user, login_required
 
+from myapp.pomodoro import PomodoroTimer
+
 @myapp_obj.route("/")
 def home():
     if current_user.is_authenticated:
@@ -48,3 +50,8 @@ def signup():
             db.session.commit()
             flash('Registration successful')
     return render_template("signup.html", form = form)
+
+@myapp_obj.route("/pomodoro-timer", methods=['GET', 'POSTS'])
+@login_required
+def pomodoro():
+    return render_template("pomodoro_timer.html")
