@@ -5,6 +5,12 @@
 	<h1>Study Helper</h1>
     </head>
     <body>
+        <!--User Menu-->
+        {% if current_user.is_authenticated %}
+            {% block menu %}
+            {% endblock %}
+        {% endif %}
+    <!--Flashed Messages-->
 	{% with messages = get_flashed_messages() %}
         {% if messages %}
         <ul>
@@ -14,7 +20,7 @@
         </ul>
         {% endif %}
         {% endwith %}
-
+    <!--Webpage Content-->
 	{% block content %}
 	{% endblock %}
     </body>
