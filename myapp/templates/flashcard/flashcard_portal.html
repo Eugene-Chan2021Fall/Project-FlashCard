@@ -1,0 +1,13 @@
+{% extends "user/user_menu.html" %}
+{% block content %}
+<a href="/flashcard/create">Create a Flashcard Set</a>
+
+<p>My Flashcards</p>
+<ul>
+{% for cards in flashcards %}
+    <li> {{ cards }} </li>
+    
+{% endfor %}
+</ul>
+
+{% endblock %}
