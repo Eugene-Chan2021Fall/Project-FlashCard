@@ -1,8 +1,12 @@
 from myapp import myapp_obj, pdf
+from myapp.convert import MarkdownConverter
+import os
 
 from myapp.forms import LoginForm, SignupForm
 from myapp.forms import FlashcardForm, CardAddForm, CardDeleteForm, FlashcardDeleteForm
 from myapp.forms import TaskForm, TaskDeleteForm
+from myapp.forms import FileForm
+from werkzeug.utils import secure_filename #*
 
 from flask import render_template, flash, redirect, url_for
 from myapp import db
@@ -140,6 +144,20 @@ def delete_sets():
             flash('Invalid ID.')
     return render_template('/flashcard/flashcard_delete.html', form=delete_form,
     flashcards=flashcards)
+
+#Upload Markdown file to flashcard
+@myapp_obj.route("/flashcard/upload", methods=['GET', 'POST'])
+@login_required
+def upload():
+    form = FileForm()
+    mdc = MarkdownConverter
+
+    if form.validate_on_submit():
+        f = secure_filename(form.file.data.filename)
+        fr= form.file.data.read().strip()
+        list = fr.splitlines(False)
+        mdc.convert(list)
+    return render_template('/flashcard/flashcard_upload.html', form=form)
 
 
 #-------------------------------------------------------------------------------

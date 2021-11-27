@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, FileField
 from wtforms_sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired
+
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -34,3 +35,7 @@ class TaskForm(FlaskForm):
 class TaskDeleteForm(FlaskForm):
     delete = IntegerField('Delete')
     del_submit = SubmitField('Remove Task')
+
+class FileForm(FlaskForm):
+    file = FileField('File')
+    submit = SubmitField('Upload')
