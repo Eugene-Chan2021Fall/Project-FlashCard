@@ -1,0 +1,10 @@
+{%extends "base.html" %}
+{% block content %}
+
+      {% if MDContent is non none %}
+           {{ MDContent | safe}}
+      {% else %}
+          <H2>.md file is missing from md folder</H2>
+      {% endif %}
+
+{% endblock %}
