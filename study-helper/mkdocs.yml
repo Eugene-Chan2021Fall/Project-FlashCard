@@ -1,0 +1,5 @@
+site_name: Study Helper
+site_url: https://study-helper.com
+nav:
+    - Home: index.md
+    - About: about.md

@@ -1,9 +1,7 @@
-# Help student 
-
-* First step
-* Second step
-* Third step
-* Fourth step
-
-
-
+# Help student
+Student
+A person at school.
+Buster
+Brown
+Super
+Hot
