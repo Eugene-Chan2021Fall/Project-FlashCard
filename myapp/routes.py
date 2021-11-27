@@ -1,4 +1,4 @@
-from myapp import myapp_obj
+from myapp import myapp_obj, pdf
 from myapp.forms import LoginForm, SignupForm
 from flask import render_template, flash, redirect
 
