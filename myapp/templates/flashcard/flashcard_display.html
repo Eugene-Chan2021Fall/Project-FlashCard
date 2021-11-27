@@ -1,6 +1,15 @@
 {% extends "user/user_menu.html" %}
 {% block content %}
 <h3>{{ name }}</h3>
-<a href="/flashcard/add/{{ name }}">Add flashcards</a>
-<a href="/flashcard/remove/{{ name }}">Remove flashcards</a>
+<a href="/flashcard">Back</a>
+<a href="/flashcard/add/{{ name }}-{{ id }}">Add flashcards</a>
+<a href="/flashcard/delete/{{ name }}-{{ id }}">Remove flashcards</a>
+
+<ul>
+{% for cards in list %}
+    <li>{{ cards }}</li>
+{% endfor %}
+
+</ul>
+
 {% endblock %}

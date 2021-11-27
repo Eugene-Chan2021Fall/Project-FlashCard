@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField
+from wtforms_sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired
 
 class LoginForm(FlaskForm):
@@ -15,11 +16,13 @@ class SignupForm(FlaskForm):
 class FlashcardForm(FlaskForm):
     name = StringField('Set Name', validators=[DataRequired()])
     submit = SubmitField('Add Set')
-class FlashcardAddForm(FlaskForm):
+class FlashcardDeleteForm(FlaskForm):
+    delete = IntegerField('Delete')
+    submit = SubmitField('Delete Set')
+class CardAddForm(FlaskForm):
     front = StringField('Front', validators=[DataRequired()])
     back = StringField('Back', validators=[DataRequired()])
     submit = SubmitField('Add Card')
-class FlashcardDeleteForm(FlaskForm):
-    front = StringField('Front', validators=[DataRequired()])
-    back = StringField('Back', validators=[DataRequired()])
+class CardDeleteForm(FlaskForm):
+    delete = IntegerField('Delete')
     submit = SubmitField('Remove Card')

@@ -1,9 +1,10 @@
 from myapp import myapp_obj
-from myapp.forms import LoginForm, SignupForm, FlashcardForm, FlashcardAddForm
+from myapp.forms import LoginForm, SignupForm, FlashcardForm, CardAddForm, CardDeleteForm
+from myapp.forms import FlashcardDeleteForm
 from flask import render_template, flash, redirect, url_for
 
 from myapp import db
-from myapp.models import User, Flashcardset
+from myapp.models import User, Flashcardset, Card
 from flask_login import current_user, login_user, logout_user, login_required
 
 from myapp.pomodoro import PomodoroTimer
@@ -73,18 +74,35 @@ def display():
     return render_template("/flashcard/flashcard_portal.html",
     flashcards = flashcards)
 
-#Main Flashcard route handling adding, removing and displaying -- ignore for now
-@myapp_obj.route("/flashcard/<option>/<name>", methods=['GET', 'POST'])
+#Main Flashcard route handling adding, removing and displaying
+@myapp_obj.route("/flashcard/<option>/<name>-<id>", methods=['GET', 'POST'])
 @login_required
-def flashcard(option, name):
+def flashcard(option, name, id):
+    #Adding Card
     if (str(option) == "add"):
-        form = FlashcardAddForm()
-        return render_template('/flashcard/flashcard_add_cards.html', form=form,
-         name=name)
+        add_form = CardAddForm()
+        if add_form.validate_on_submit():
+            card = Card(front = add_form.front.data, back = add_form.back.data, set_id = id)
+            db.session.add(card)
+            db.session.commit()
+            flash(f'Card has been added')
+        return render_template('/flashcard/flashcard_add_cards.html', form=add_form,
+         name=name, id=id)
+    #Deleting Cards
     elif (str(option) == "delete"):
-        return "deleting flashcards"
+        list = Card.query.filter_by(set_id = id)
+        delete_form = CardDeleteForm()
+        if delete_form.validate_on_submit():
+            card = Card.query.get(delete_form.delete.data)
+            db.session.delete(card)
+            db.session.commit()
+            flash(f'{card} has been removed.')
+        return render_template('/flashcard/flashcard_delete_cards.html', list=list ,form=
+        delete_form, name=name, id=id)
+    #Displaying Cards
     elif (str(option) == "display"):
-        return render_template('/flashcard/flashcard_display.html', name=name)
+        list = Card.query.filter_by(set_id = id)
+        return render_template('/flashcard/flashcard_display.html', name=name, id=id, list = list)
 
     return str(option) + ' is a invalid route.'
 
@@ -97,19 +115,19 @@ def create():
     flash(f'Debug User Id: {user}')
     if form.validate_on_submit():
         set = Flashcardset(name = form.name.data, author_id = current_user.get_id())
-        flash(f'{set.name}')
         db.session.add(set)
         db.session.commit()
-        return redirect(url_for('display', name = set.name))
+        return redirect(url_for('flashcard', option="display", name=set.name, id=set.id))
     return render_template("/flashcard/flashcard_create.html", form = form)
 
 #Edit flashcard set --ignore for now
-@myapp_obj.route("/flashcard/edit", methods=['GET', 'POST'])
+@myapp_obj.route("/flashcard/delete", methods=['GET', 'POST'])
 @login_required
-def edit_sets():
-    '''
-    form = FlashcardAddForm()
-    if form.validate_on_submit():
-        return 'Works'
-'''
-    return render_template('/flashcard/flashcard_edit_sets.html', name=name)
+def delete_sets():
+    delete_form = FlashcardDeleteForm()
+    if delete_form.validate_on_submit():
+        flashcard = Flashcardset.query.get(delete_form.delete.data)
+        db.session.delete(flashcard)
+        #db.session.commit()
+        flash(f'{flashcard} has been removed.')
+    return render_template('/flashcard/flashcard_delete.html', form=delete_form)

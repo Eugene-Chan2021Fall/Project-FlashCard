@@ -1,7 +1,9 @@
 {% extends "user/user_menu.html" %}
 {% block content %}
 <p>{{ name }}</p>
+<a href="/flashcard/display/{{ name }}-{{ id }}">Back</a>
 <form method="POST" novalidate>
+{{ form.csrf_token }}
 <p> {{ form.front.label }} <br>
 {{ form.front(size=32) }}</p>
 

@@ -5,8 +5,10 @@
 <p>My Flashcards</p>
 <ul>
 {% for cards in flashcards %}
-    <li> {{ cards }} </li>
-    
+    <li>
+    <a href="/flashcard/display/{{ cards.name }}-{{ cards.id }}">{{ cards }}</a>
+    </li>
+
 {% endfor %}
 </ul>
 
