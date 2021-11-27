@@ -26,3 +26,11 @@ class CardAddForm(FlaskForm):
 class CardDeleteForm(FlaskForm):
     delete = IntegerField('Delete')
     submit = SubmitField('Remove Card')
+
+class TaskForm(FlaskForm):
+    task = StringField('Task', validators=[DataRequired()])
+    submit = SubmitField('Add Task')
+
+class TaskDeleteForm(FlaskForm):
+    delete = IntegerField('Delete')
+    del_submit = SubmitField('Remove Task')

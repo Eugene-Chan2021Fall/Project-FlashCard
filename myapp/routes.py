@@ -1,10 +1,12 @@
 from myapp import myapp_obj, pdf
-from myapp.forms import LoginForm, SignupForm, FlashcardForm, CardAddForm, CardDeleteForm
-from myapp.forms import FlashcardDeleteForm
-from flask import render_template, flash, redirect, url_for
 
+from myapp.forms import LoginForm, SignupForm
+from myapp.forms import FlashcardForm, CardAddForm, CardDeleteForm, FlashcardDeleteForm
+from myapp.forms import TaskForm, TaskDeleteForm
+
+from flask import render_template, flash, redirect, url_for
 from myapp import db
-from myapp.models import User, Flashcardset, Card
+from myapp.models import User, Flashcardset, Card, Task
 from flask_login import current_user, login_user, logout_user, login_required
 #Home
 @myapp_obj.route("/")
@@ -91,9 +93,12 @@ def flashcard(option, name, id):
         delete_form = CardDeleteForm()
         if delete_form.validate_on_submit():
             card = Card.query.get(delete_form.delete.data)
-            db.session.delete(card)
-            db.session.commit()
-            flash(f'{card} has been removed.')
+            if card is not None and int(id) == int(card.set_id):
+                db.session.delete(card)
+                db.session.commit()
+                flash(f'{card} has been removed.')
+            else:
+                flash(f'Invalid ID')
         return render_template('/flashcard/flashcard_delete_cards.html', list=list ,form=
         delete_form, name=name, id=id)
     #Displaying Cards
@@ -121,12 +126,50 @@ def create():
 @myapp_obj.route("/flashcard/delete", methods=['GET', 'POST'])
 @login_required
 def delete_sets():
-    flashcards = Flashcardset.query.filter_by(author_id = current_user.get_id())
+    checkUser = current_user.get_id()
+    flashcards = Flashcardset.query.filter_by(author_id = checkUser)
     delete_form = FlashcardDeleteForm()
     if delete_form.validate_on_submit():
         flashcard = Flashcardset.query.get(delete_form.delete.data)
-        db.session.delete(flashcard)
-        db.session.commit()
-        flash(f'{flashcard} has been removed.')
+        #Deleting Process --Needs to be replaced later
+        if flashcard is not None and flashcard.author_id == int(checkUser):
+            db.session.delete(flashcard)
+            db.session.commit()
+            flash(f'{flashcard} has been removed.')
+        else:
+            flash('Invalid ID.')
     return render_template('/flashcard/flashcard_delete.html', form=delete_form,
     flashcards=flashcards)
+
+
+#-------------------------------------------------------------------------------
+#Todo-Tracker
+@myapp_obj.route("/todo-tracker", methods=['GET', 'POST'])
+@login_required
+def todo_tracker():
+    add_form = TaskForm()
+    list = Task.query.filter_by(author_id = current_user.get_id())
+    if add_form.validate_on_submit():
+        task = Task(task = add_form.task.data, author_id = current_user.get_id())
+        db.session.add(task)
+        db.session.commit()
+        flash('Task added.')
+
+    return render_template("/user/todo-tracker.html", add_form=add_form, list=list)
+
+@myapp_obj.route("/todo-tracker/delete", methods=['GET', 'POST'])
+@login_required
+def todo_tracker_delete():
+    checkUser = current_user.get_id()
+    delete_form = TaskDeleteForm()
+    list = Task.query.filter_by(author_id = checkUser)
+    if delete_form.validate_on_submit():
+        task = Task.query.get(delete_form.delete.data)
+        #Deleting Process --Needs to be replaced later
+        if task is not None and task.author_id == int(checkUser):
+            db.session.delete(task)
+            db.session.commit()
+            flash('Task deleted.')
+        else:
+            flash('Invalid ID.')
+    return render_template("/user/todo-tracker_delete.html", delete_form=delete_form, list=list)

@@ -12,7 +12,10 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), unique=True, index=True)
     email = db.Column(db.String(128), unique=True)
     password  = db.Column(db.String(128))
+
+    #Relationships
     flashcard_set = db.relationship('Flashcardset', backref='author', lazy=True)
+    tasks = db.relationship('Task', backref='author', lazy=True)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -21,8 +24,10 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
     def __repr__(self):
-        return f'<User {self.id}: {self.username}> |Sets : {self.flashcard_set}'
+        return f'<User {self.id}: {self.username}> |Sets : {self.flashcard_set}| Tasks: {self.tasks}'
 
+#-------------------------------------------------------------------------------
+#Flashcards
 '''
 WIP Sharing Model
 class FlashcardSupport(db.Model):
@@ -52,6 +57,15 @@ class Card(UserMixin, db.Model):
     def __repr__(self):
         return f'|[{self.front}, {self.back}] Id: {self.id}|'
 
+#-------------------------------------------------------------------------------
+#Todo-tracker
+class Task(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    task = db.Column(db.String(256), index=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return f'Id: {self.id} |{self.task}|'
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
