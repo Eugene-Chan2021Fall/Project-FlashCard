@@ -1,6 +1,7 @@
-from myapp import myapp_obj
-from myapp.forms import LoginForm, SignupForm, FlashcardForm, FlashcardAddForm
-from flask import render_template, flash, redirect, url_for
+
+from myapp import myapp_obj, pdf
+from myapp.forms import LoginForm, SignupForm
+from flask import render_template, flash, redirect
 
 from myapp import db
 from myapp.models import User, Flashcardset
