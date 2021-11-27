@@ -2,7 +2,7 @@
 {% block content %}
 <p>{{ name }}</p>
 <a href="/flashcard/display/{{ name }}-{{ id }}">Back</a>
-<h6>For now remove cards by their id</h6>
+<h6>For now remove cards by their id. Drop down menu will come in the future.</h6>
 <form method="POST" novalidate>
 {{ form.csrf_token }}
 <p> {{ form.delete.label }} <br>

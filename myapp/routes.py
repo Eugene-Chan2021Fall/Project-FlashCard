@@ -1,4 +1,4 @@
-from myapp import myapp_obj
+from myapp import myapp_obj, pdf
 from myapp.forms import LoginForm, SignupForm, FlashcardForm, CardAddForm, CardDeleteForm
 from myapp.forms import FlashcardDeleteForm
 from flask import render_template, flash, redirect, url_for
@@ -6,9 +6,6 @@ from flask import render_template, flash, redirect, url_for
 from myapp import db
 from myapp.models import User, Flashcardset, Card
 from flask_login import current_user, login_user, logout_user, login_required
-
-from myapp.pomodoro import PomodoroTimer
-
 #Home
 @myapp_obj.route("/")
 def home():
@@ -124,10 +121,12 @@ def create():
 @myapp_obj.route("/flashcard/delete", methods=['GET', 'POST'])
 @login_required
 def delete_sets():
+    flashcards = Flashcardset.query.filter_by(author_id = current_user.get_id())
     delete_form = FlashcardDeleteForm()
     if delete_form.validate_on_submit():
         flashcard = Flashcardset.query.get(delete_form.delete.data)
         db.session.delete(flashcard)
-        #db.session.commit()
+        db.session.commit()
         flash(f'{flashcard} has been removed.')
-    return render_template('/flashcard/flashcard_delete.html', form=delete_form)
+    return render_template('/flashcard/flashcard_delete.html', form=delete_form,
+    flashcards=flashcards)

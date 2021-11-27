@@ -39,7 +39,7 @@ class Flashcardset(UserMixin, db.Model):
     cards = db.relationship('Card', backref='set', lazy=True)
 
     def __repr__(self):
-        return f'|{self.id}, {self.name}|'
+        return f'Id: {self.id} |{self.name}|'
 
 
 class Card(UserMixin, db.Model):

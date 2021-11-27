@@ -1,0 +1,11 @@
+{% extends "user/user_menu.html" %}
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pomodoro.css') }}">
+</head>
+{% block content %}
+
+<h1>Mind map</h1>
+
+<input type="submit" name="submit_button" value="Make PDF">
+
+{% endblock %}
