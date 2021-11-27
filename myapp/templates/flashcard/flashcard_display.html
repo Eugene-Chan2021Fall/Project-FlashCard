@@ -1,0 +1,6 @@
+{% extends "user/user_menu.html" %}
+{% block content %}
+<h3>{{ name }}</h3>
+<a href="/flashcard/add/{{ name }}">Add flashcards</a>
+<a href="/flashcard/remove/{{ name }}">Remove flashcards</a>
+{% endblock %}

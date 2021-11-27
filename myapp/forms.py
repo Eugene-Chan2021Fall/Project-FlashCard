@@ -12,4 +12,14 @@ class SignupForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     password = PasswordField('Password')
     submit = SubmitField('Sign up')
-
+class FlashcardForm(FlaskForm):
+    name = StringField('Set Name', validators=[DataRequired()])
+    submit = SubmitField('Add Set')
+class FlashcardAddForm(FlaskForm):
+    front = StringField('Front', validators=[DataRequired()])
+    back = StringField('Back', validators=[DataRequired()])
+    submit = SubmitField('Add Card')
+class FlashcardDeleteForm(FlaskForm):
+    front = StringField('Front', validators=[DataRequired()])
+    back = StringField('Back', validators=[DataRequired()])
+    submit = SubmitField('Remove Card')

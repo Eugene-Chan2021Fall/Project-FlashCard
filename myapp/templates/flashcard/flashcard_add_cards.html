@@ -1,0 +1,14 @@
+{% extends "user/user_menu.html" %}
+{% block content %}
+<p>{{ name }}</p>
+<form method="POST" novalidate>
+<p> {{ form.front.label }} <br>
+{{ form.front(size=32) }}</p>
+
+<p> {{ form.back.label }} <br>
+{{ form.back(size=32) }}</p>
+
+<p>{{ form.submit() }}</p>
+</form>
+
+{% endblock %}
