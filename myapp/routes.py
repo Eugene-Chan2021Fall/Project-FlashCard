@@ -15,6 +15,13 @@ from flask_login import current_user, login_user, logout_user, login_required
 #Home
 @myapp_obj.route("/")
 def home():
+    '''
+    This is the home route endpoint.
+
+    Returns
+    -------
+    Renders the home.html template.
+    '''
     if current_user.is_authenticated:
         name = User.query.get(current_user.get_id()).username
         return render_template("user/user_home.html", name = name)
@@ -25,6 +32,18 @@ def home():
 #Login/Sign up
 @myapp_obj.route("/login", methods=['GET', 'POST'])
 def login():
+    '''
+    This is the login route endpoint.
+
+    Parameters
+    ----------
+    GET : /login
+    POST : login information
+
+    Returns
+    -------
+    Renders the login.html template.
+    '''
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username = form.username.data).first()
@@ -38,11 +57,30 @@ def login():
 
 @myapp_obj.route("/logout")
 def logout():
+    '''
+    This is the logout route endpoint.
+
+    Returns
+    -------
+    Redirects back to the home directory.
+    '''
     logout_user()
     return redirect("/")
 
 @myapp_obj.route("/signup", methods=['GET', 'POST'])
 def signup():
+    '''
+    This is the signup route endpoint.
+
+    Parameters
+    ----------
+    GET : /signup
+    POST : signup information
+
+    Returns
+    -------
+    Renders the signup.html template.
+    '''
     form = SignupForm()
     if form.validate_on_submit():
         checkName = User.query.filter_by(username = form.username.data).first()
@@ -62,17 +100,31 @@ def signup():
 #-------------------------------------------------------------------------------
 
 #Pomodoro
-@myapp_obj.route("/pomodoro-timer", methods=['GET', 'POST'])
+@myapp_obj.route("/pomodoro-timer")
 @login_required
 def pomodoro():
+    '''
+    This is the pomodoro timer route.
+
+    Returns
+    -------
+    Renders the pomodoro_timer.html template.
+    '''
     return render_template("user/pomodoro_timer.html")
 
 
 #-------------------------------------------------------------------------------
 #Flashcards
-@myapp_obj.route("/flashcard", methods=['GET', 'POST'])
+@myapp_obj.route("/flashcard")
 @login_required
 def display():
+    '''
+    This is the flashcard set route.
+
+    Returns
+    -------
+    Renders the flashcard_portal.html template.
+    '''
     flashcards = Flashcardset.query.filter_by(author_id = current_user.get_id())
     return render_template("/flashcard/flashcard_portal.html",
     flashcards = flashcards)
@@ -81,8 +133,38 @@ def display():
 @myapp_obj.route("/flashcard/<option>/<name>-<id>", methods=['GET', 'POST'])
 @login_required
 def flashcard(option, name, id):
+    '''
+    This is the route that handles many of the flashcard set's features
+    such as adding Cards, removing Cards, and renaming the set.
+
+    Defined Routes
+    --------------
+    /flashcard/add/<name>-<id> : Takes flashcard set name and the primary key
+    Adds Cards to flashcard set.
+
+    /flashcard/delete/<name>-<id> : Takes flashcard set name and the primary key
+    Delete Cards to flashcard set.
+
+    /flashcard/display/<name>-<id> : Takes flashcard set name and the primary key
+    Display Cards in flashcard set.
+
+    /flashcard/rename/<name>-<id> : Takes flashcard set name and the primary key
+    Rename flashcard set.
+
+    Parameters
+    ----------
+    GET : /flashcard/rename/<name>-<id>
+    POST : Form data from each route.
+
+    Returns
+    -------
+    Renders the flashcard_add_cards.html template.
+    Renders the flashcard_delete_cards.html template.
+    Renders the flashcard_display.html template.
+    Renders the flashcard_rename_cards.html template. --Not implemented yet
+    '''
     #Adding Card
-    if (str(option) == "add"):
+    if (str(option).lower() == "add"):
         add_form = CardAddForm()
         if add_form.validate_on_submit():
             card = Card(front = add_form.front.data, back = add_form.back.data, set_id = id)
@@ -92,12 +174,12 @@ def flashcard(option, name, id):
         return render_template('/flashcard/flashcard_add_cards.html', form=add_form,
          name=name, id=id)
     #Deleting Cards
-    elif (str(option) == "delete"):
+    elif (str(option).lower() == "delete"):
         list = Card.query.filter_by(set_id = id)
         delete_form = CardDeleteForm()
         if delete_form.validate_on_submit():
             card = Card.query.get(delete_form.delete.data)
-            if card is not None and int(id) == int(card.set_id):
+            if card is not None and int(id) == int(card.set_id):    #Checks if Card belongs to the correct set
                 db.session.delete(card)
                 db.session.commit()
                 flash(f'{card} has been removed.')
@@ -106,7 +188,7 @@ def flashcard(option, name, id):
         return render_template('/flashcard/flashcard_delete_cards.html', list=list ,form=
         delete_form, name=name, id=id)
     #Displaying Cards
-    elif (str(option) == "display"):
+    elif (str(option).lower() == "display"):
         list = Card.query.filter_by(set_id = id)
         return render_template('/flashcard/flashcard_display.html', name=name, id=id, list = list)
 
@@ -116,6 +198,17 @@ def flashcard(option, name, id):
 @myapp_obj.route("/flashcard/create", methods=['GET', 'POST'])
 @login_required
 def create():
+    '''
+    This is the route to create flashcard sets.
+
+    Parameters
+    ----------
+    GET : /flashcard/create
+    POST : new Flashcardset data
+    Returns
+    -------
+    Renders the flashcard_create.html template.
+    '''
     form = FlashcardForm()
     user = current_user.get_id()
     flash(f'Debug User Id: {user}')
@@ -126,10 +219,21 @@ def create():
         return redirect(url_for('flashcard', option="display", name=set.name, id=set.id))
     return render_template("/flashcard/flashcard_create.html", form = form)
 
-#Edit flashcard set --ignore for now
+#Delete flashcard set
 @myapp_obj.route("/flashcard/delete", methods=['GET', 'POST'])
 @login_required
 def delete_sets():
+    '''
+    This is the route to delete flashcard sets.
+
+    Parameters
+    ----------
+    GET : /flashcard/delete
+    POST : delete param
+    Returns
+    -------
+    Renders the flashcard_delete.html template.
+    '''
     checkUser = current_user.get_id()
     flashcards = Flashcardset.query.filter_by(author_id = checkUser)
     delete_form = FlashcardDeleteForm()
@@ -149,6 +253,17 @@ def delete_sets():
 @myapp_obj.route("/flashcard/upload", methods=['GET', 'POST'])
 @login_required
 def upload():
+    '''
+    This is the route to upload a markdown file to make a flashcard set.
+
+    Parameters
+    ----------
+    GET : /flashcard/upload
+    POST : markdown file
+    Returns
+    -------
+    Renders the flashcard_upload.html template.
+    '''
     form = FileForm()
     mdc = MarkdownConverter
 
@@ -165,6 +280,17 @@ def upload():
 @myapp_obj.route("/todo-tracker", methods=['GET', 'POST'])
 @login_required
 def todo_tracker():
+    '''
+    This is the route to display/add to the todo-tracker.
+
+    Parameters
+    ----------
+    GET : /todo-tracker
+    POST : tasks
+    Returns
+    -------
+    Renders the todo-tracker.html template.
+    '''
     add_form = TaskForm()
     list = Task.query.filter_by(author_id = current_user.get_id())
     if add_form.validate_on_submit():
@@ -178,6 +304,17 @@ def todo_tracker():
 @myapp_obj.route("/todo-tracker/delete", methods=['GET', 'POST'])
 @login_required
 def todo_tracker_delete():
+    '''
+    This is the route to remove task from the todo-tracker.
+
+    Parameters
+    ----------
+    GET : /todo-tracker
+    POST : delete param
+    Returns
+    -------
+    Renders the todo-tracker_delete.html template.
+    '''
     checkUser = current_user.get_id()
     delete_form = TaskDeleteForm()
     list = Task.query.filter_by(author_id = checkUser)

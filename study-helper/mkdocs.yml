@@ -2,4 +2,5 @@ site_name: Study Helper
 site_url: https://study-helper.com
 nav:
     - Home: index.md
+    - Documentation: documentation.md
     - About: about.md

@@ -11,4 +11,3 @@ def rendMark():
               else:
                          MDContent = None
               return render_template('index.html, MDContent=MDContent, Routes=context_routes')
-
