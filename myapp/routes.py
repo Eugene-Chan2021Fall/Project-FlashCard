@@ -45,7 +45,7 @@ def login():
         user = User.query.filter_by(username = form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Login invalid username or password!')
-            return redirect("login_templates/login")
+            return redirect("/login")
         else:
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
@@ -122,8 +122,11 @@ def display():
     Renders the flashcard_portal.html template.
     '''
     flashcards = Flashcardset.query.filter_by(author_id = current_user.get_id())
+    #Getting Share List
+    user = User.query.get(current_user.get_id())       #Gets current_user
+    share_list = Flashcardshare.query.filter_by(target = user.username)
     return render_template("/flashcard/flashcard_portal.html",
-    flashcards = flashcards)
+    flashcards = flashcards, share_list = share_list)
 
 #Main Flashcard route handling adding, removing and displaying
 @myapp_obj.route("/flashcard/<option>/<name>-<id>", methods=['GET', 'POST'])
@@ -332,6 +335,41 @@ def rename_sets():
                 return redirect('/flashcard/rename')
     return render_template("/flashcard/flashcard_rename.html", form=form)
 
+#Share flashcards
+@myapp_obj.route("/flashcard/share", methods=['GET', 'POST'])
+@login_required
+def flashcard_share():
+    '''
+    This is the route to share flashcard sets.
+
+    Parameters
+    ----------
+    GET : /flashcard/rename
+    POST : rename param, new name
+    Returns
+    -------
+    Renders the flashcard/rename.html template.
+    Redirects back to /flashcard/rename
+    '''
+    form = ShareForm()
+    list = Flashcardset.query.filter_by(author_id = current_user.get_id())
+    form.select.choices = [(g.id, g.name) for g in list] #Refresh Choices
+
+    if form.validate_on_submit:
+        checkName = User.query.filter_by(username = form.target.data)
+        if checkName is None:
+            flash('User not found.')
+        elif form.select.data is None:
+            flash('Pick a set')
+        else:
+            flashcard = Flashcardset.query.get(form.select.data)
+            share = Flashcardshare(target = form.target.data, flashcard_id = form.select.data, flashcard_name = flashcard.name)
+            db.session.add(share)
+            db.session.commit()
+            flash(f'Flashcard shared to {form.select.data}.')
+            flash(f'Flashcard shared to {form.target.data}.')
+    return render_template('/flashcard/flashcard_share.html', form=form)
+
 #-------------------------------------------------------------------------------
 #Todo-Tracker
 @myapp_obj.route("/todo-tracker", methods=['GET', 'POST'])
@@ -421,4 +459,31 @@ def rename_tasks():
                 return redirect('/todo-tracker/rename')
     return render_template("/user/todo-tracker_rename.html", form=form)
 
+
 #-------------------------------------------------------------------------------
+# Notes
+@myapp_obj.route("/notes")
+@login_required
+def notes_portal():
+    '''
+    This is the route to display User's markdown notes.
+
+    Returns
+    -------
+    Renders the notes_portal.html template.
+    '''
+
+    return render_template('notes/notes_portal.html')
+
+@myapp_obj.route("/notes/<name>")
+@login_required
+def notes_display(name):
+    '''
+    This route shows the contents inside the User's notes.
+
+    Returns
+    -------
+    Renders the notes_display.html template.
+    '''
+
+    return render_template('notes/notes_portal.html')

@@ -24,6 +24,7 @@ class User(UserMixin, db.Model):
     password : string
     flashcard_set : class Flashcardset --> author_id (Foreign Key)
     tasks : class Task --> author_id (Foreign Key)
+    notes : class Note --> author_id (Foreign Key)
 
     Returns
     -------
@@ -38,6 +39,7 @@ class User(UserMixin, db.Model):
     #Relationships
     flashcard_set = db.relationship('Flashcardset', backref='author', lazy=True)
     tasks = db.relationship('Task', backref='author', lazy=True)
+    notes = db.relationship('Note', backref='author', lazy=True)
 
     def set_password(self, password):
         '''
@@ -96,6 +98,7 @@ class Flashcardset(UserMixin, db.Model):
     -----
     id : int (Primary Key)
     author_id : int (Foreign Key) --> flashcard_set (class User)
+    author_id : int (Foreign Key) --> share (class Flashcardshare)
     name : str
     cards : class Card --> set_id (Foreign Key)
 
@@ -106,6 +109,7 @@ class Flashcardset(UserMixin, db.Model):
     #Flashcard set model that takes cards and puts them into a set.
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    share_id = db.Column(db.Integer)
     name = db.Column(db.String(64), unique=False, index=True)
     cards = db.relationship('Card', backref='set', lazy=True)
 
@@ -141,7 +145,38 @@ class Card(UserMixin, db.Model):
     set_id = db.Column(db.Integer, db.ForeignKey('flashcardset.id'))
 
     def __repr__(self):
-        return f'|[{self.front}, {self.back}] Id: {self.id}|'
+        return f'Id: {self.id} [{self.front}, {self.back}]'
+
+class Flashcardshare(UserMixin, db.Model):
+    '''
+    A class that holds permissions of who can view notes.
+
+    Parameters
+    ----------
+    UserMixin : login tracker
+    db.Model : db
+    SQLalchemy database model.
+
+    Model
+    -----
+    id : int (Primary Key)
+    flashcard_id : int
+    A flashcard primary_key.
+    target : int
+    Another user's primary key.
+
+    Returns
+    -------
+    None
+    '''
+    id = db.Column(db.Integer, primary_key=True)
+    flashcard_id = db.Column(db.Integer)
+    flashcard_name = db.Column(db.String)
+    target = db.Column(db.Integer)
+
+    def __repr__(self):
+        flashcard = Flashcardset.query.get(self.flashcard_id)
+        return f'Id: {flashcard.id} |{flashcard.name}|'
 
 #-------------------------------------------------------------------------------
 #Todo-tracker
@@ -159,7 +194,7 @@ class Task(UserMixin, db.Model):
     -----
     id : int (Primary Key)
     task : str
-    author_id : int (Foreign Key) --> tasks (class User)
+    author_id : int (Foreign Key) --> notes (class User)
 
     Returns
     -------
@@ -171,6 +206,65 @@ class Task(UserMixin, db.Model):
 
     def __repr__(self):
         return f'Id: {self.id} |{self.task}|'
+
+#-------------------------------------------------------------------------------
+#Notes
+class Note(UserMixin, db.Model):
+    '''
+    A class that represents notes.
+
+    Parameters
+    ----------
+    UserMixin : login tracker
+    db.Model : db
+    SQLalchemy database model.
+
+    Model
+    -----
+    id : int (Primary Key)
+    note : str
+    share_id : int class Note --> author_id (Foreign Key)
+    author_id : int (Foreign Key) --> notes (class User)
+
+    Returns
+    -------
+    None
+    '''
+    id = db.Column(db.Integer, primary_key=True)
+    note = db.Column(db.String(1024), index=True)
+    share_id = db.Column(db.Integer)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return f'Id: {self.id} |{self.note}|'
+
+class Noteshare(UserMixin, db.Model):
+    '''
+    A class that holds permissions of who can view notes.
+
+    Parameters
+    ----------
+    UserMixin : login tracker
+    db.Model : db
+    SQLalchemy database model.
+
+    Model
+    -----
+    id : int (Primary Key)
+    note_id : int
+    A note's primary key.
+    target : int
+    Another user's primary key.
+
+    Returns
+    -------
+    None
+    '''
+    id = db.Column(db.Integer, primary_key=True)
+    note_id = db.Column(db.Integer)
+    note_name = db.Column(db.Integer)
+    target = db.Column(db.Integer)
+
 
 @login.user_loader
 def load_user(id):
