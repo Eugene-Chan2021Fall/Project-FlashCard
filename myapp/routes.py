@@ -2,15 +2,11 @@ from myapp import myapp_obj, pdf
 from myapp.convert import MarkdownConverter
 import os
 
-from myapp.forms import LoginForm, SignupForm
-from myapp.forms import FlashcardForm, CardAddForm, CardDeleteForm, FlashcardDeleteForm
-from myapp.forms import TaskForm, TaskDeleteForm
-from myapp.forms import FileForm
-from werkzeug.utils import secure_filename #*
+from myapp.forms import *
 
 from flask import render_template, flash, redirect, url_for
 from myapp import db
-from myapp.models import User, Flashcardset, Card, Task
+from myapp.models import *
 from flask_login import current_user, login_user, logout_user, login_required
 #Home
 @myapp_obj.route("/")
@@ -161,11 +157,11 @@ def flashcard(option, name, id):
     Renders the flashcard_add_cards.html template.
     Renders the flashcard_delete_cards.html template.
     Renders the flashcard_display.html template.
-    Renders the flashcard_rename_cards.html template. --Not implemented yet
+    Renders the flashcard_edit_cards.html template. --Not implemented yet
     '''
     #Adding Card
     if (str(option).lower() == "add"):
-        add_form = CardAddForm()
+        add_form = CardForm()
         if add_form.validate_on_submit():
             card = Card(front = add_form.front.data, back = add_form.back.data, set_id = id)
             db.session.add(card)
@@ -173,31 +169,58 @@ def flashcard(option, name, id):
             flash(f'Card has been added')
         return render_template('/flashcard/flashcard_add_cards.html', form=add_form,
          name=name, id=id)
+    #---------------------------------------------------------------------------
     #Deleting Cards
     elif (str(option).lower() == "delete"):
         list = Card.query.filter_by(set_id = id)
-        delete_form = CardDeleteForm()
+        delete_form = DeleteForm()
+        delete_form.delete.choices = [(g.id, f'[{g.front}, {g.back}]') for g in list]
+
         if delete_form.validate_on_submit():
             card = Card.query.get(delete_form.delete.data)
-            if card is not None and int(id) == int(card.set_id):    #Checks if Card belongs to the correct set
+            if card is None:
+                flash('empty')
+            else:
                 db.session.delete(card)
                 db.session.commit()
                 flash(f'{card} has been removed.')
-            else:
-                flash(f'Invalid ID')
-        return render_template('/flashcard/flashcard_delete_cards.html', list=list ,form=
+                return redirect(f'/flashcard/delete/{name}-{id}')
+        return render_template('/flashcard/flashcard_delete_cards.html',form=
         delete_form, name=name, id=id)
+    #---------------------------------------------------------------------------
     #Displaying Cards
     elif (str(option).lower() == "display"):
         list = Card.query.filter_by(set_id = id)
         return render_template('/flashcard/flashcard_display.html', name=name, id=id, list = list)
 
+    #---------------------------------------------------------------------------
+    #Rename Cards
+    elif (str(option).lower() == "edit"):
+        list = Card.query.filter_by(set_id = id)
+        edit_form = CardEditForm()
+        edit_form.select.choices = [(g.id, f'[{g.front}, {g.back}]') for g in list] #Refresh Choices
+        if edit_form.validate_on_submit():
+            card = Card.query.get(edit_form.select.data)
+            if card is None:
+                flash('empty')
+            else:
+                if len(edit_form.front.data) == 0 or len(edit_form.back.data) == 0:
+                    flash('Empty front/back.')
+                else:
+                    card.front = edit_form.front.data
+                    card.back = edit_form.back.data
+                    db.session.commit()
+                    flash('Renamed card.')
+                    edit_form.select.choices = [(g.id, f'[{g.front}, {g.back}]') for g in list] #Refresh Choices
+                    redirect(f'/flashcard/edit/{name}-{id}')
+        return render_template('/flashcard/flashcard_edit_cards.html', name=name, id=id, form=edit_form)
     return str(option) + ' is a invalid route.'
+
 
 #Creates flashcard set
 @myapp_obj.route("/flashcard/create", methods=['GET', 'POST'])
 @login_required
-def create():
+def create_sets():
     '''
     This is the route to create flashcard sets.
 
@@ -233,21 +256,21 @@ def delete_sets():
     Returns
     -------
     Renders the flashcard_delete.html template.
+    Redirects back to /flashcard/delete
     '''
-    checkUser = current_user.get_id()
-    flashcards = Flashcardset.query.filter_by(author_id = checkUser)
-    delete_form = FlashcardDeleteForm()
-    if delete_form.validate_on_submit():
-        flashcard = Flashcardset.query.get(delete_form.delete.data)
-        #Deleting Process --Needs to be replaced later
-        if flashcard is not None and flashcard.author_id == int(checkUser):
+    list = Flashcardset.query.filter_by(author_id = current_user.get_id())
+    form = DeleteForm()
+    form.delete.choices = [(g.id, g.name) for g in list]
+    if form.validate_on_submit():
+        flashcard = Flashcardset.query.get(form.delete.data)
+        if flashcard is None:
+            flash('empty')
+        else:
             db.session.delete(flashcard)
             db.session.commit()
             flash(f'{flashcard} has been removed.')
-        else:
-            flash('Invalid ID.')
-    return render_template('/flashcard/flashcard_delete.html', form=delete_form,
-    flashcards=flashcards)
+            return redirect('/flashcard/delete')
+    return render_template('/flashcard/flashcard_delete.html', form=form)
 
 #Upload Markdown file to flashcard
 @myapp_obj.route("/flashcard/upload", methods=['GET', 'POST'])
@@ -274,6 +297,40 @@ def upload():
         mdc.convert(list)
     return render_template('/flashcard/flashcard_upload.html', form=form)
 
+#Rename flashcard set
+@myapp_obj.route("/flashcard/rename", methods=['GET', 'POST'])
+@login_required
+def rename_sets():
+    '''
+    This is the route to rename flashcard sets.
+
+    Parameters
+    ----------
+    GET : /flashcard/rename
+    POST : rename param, new name
+    Returns
+    -------
+    Renders the flashcard/rename.html template.
+    Redirects back to /flashcard/rename
+    '''
+    list = Flashcardset.query.filter_by(author_id = current_user.get_id())
+    form = RenameForm()
+    form.select.choices = [(g.id, g.name) for g in list] #Refresh Choices
+
+    if form.validate_on_submit():
+        if len(form.name.data) == 0:
+            flash('New name is empty.')
+        else:
+            flashcard = Flashcardset.query.get(form.select.data)
+            if flashcard is None:
+                flash('empty')
+            else:
+                flashcard.name = form.name.data
+                db.session.commit()
+                flash('Renaming sucessful')
+                form.select.choices = [(g.id, g.name) for g in list] #Refresh Choices
+                return redirect('/flashcard/rename')
+    return render_template("/flashcard/flashcard_rename.html", form=form)
 
 #-------------------------------------------------------------------------------
 #Todo-Tracker
@@ -301,6 +358,7 @@ def todo_tracker():
 
     return render_template("/user/todo-tracker.html", add_form=add_form, list=list)
 
+#Task remover
 @myapp_obj.route("/todo-tracker/delete", methods=['GET', 'POST'])
 @login_required
 def todo_tracker_delete():
@@ -309,22 +367,58 @@ def todo_tracker_delete():
 
     Parameters
     ----------
-    GET : /todo-tracker
+    GET : /todo-tracker/delete
     POST : delete param
     Returns
     -------
     Renders the todo-tracker_delete.html template.
+    Redirects back to /todo-tracker/delete
     '''
-    checkUser = current_user.get_id()
-    delete_form = TaskDeleteForm()
-    list = Task.query.filter_by(author_id = checkUser)
-    if delete_form.validate_on_submit():
-        task = Task.query.get(delete_form.delete.data)
-        #Deleting Process --Needs to be replaced later
-        if task is not None and task.author_id == int(checkUser):
-            db.session.delete(task)
-            db.session.commit()
-            flash('Task deleted.')
+    form = DeleteForm()
+    list = Task.query.filter_by(author_id = current_user.get_id())
+    form.delete.choices = [(g.id, g.task) for g in list]
+    if form.validate_on_submit():
+        task = Task.query.get(form.delete.data)
+        db.session.delete(task)
+        db.session.commit()
+        flash(f'{task} removed.')
+        return redirect('/todo-tracker/delete')
+
+    return render_template("/user/todo-tracker_delete.html", form=form)
+
+#Rename tasks
+@myapp_obj.route("/todo-tracker/rename", methods=['GET', 'POST'])
+@login_required
+def rename_tasks():
+    '''
+    This is the route to rename tasks.
+
+    Parameters
+    ----------
+    GET : /todo-tracker/rename
+    POST : rename param, new name
+    Returns
+    -------
+    Renders the todo-tracker/rename.html template.
+    Redirects back to /todo-tracker/rename
+    '''
+    list = Task.query.filter_by(author_id = current_user.get_id())
+    form = RenameForm()
+    form.select.choices = [(g.id, g.task) for g in list] #Refresh Choices
+
+    if form.validate_on_submit():
+        if len(form.name.data) == 0:
+            flash('New name is empty.')
         else:
-            flash('Invalid ID.')
-    return render_template("/user/todo-tracker_delete.html", delete_form=delete_form, list=list)
+            task = Task.query.get(form.select.data)
+            if flashcard is None:
+                flash('empty')
+            else:
+                task.task = form.name.data
+                db.session.commit()
+                flash('Renaming sucessful')
+                form.select.choices = [(g.id, g.task) for g in list] #Refresh Choices
+                return redirect('/todo-tracker/rename')
+    return render_template("/user/todo-tracker_rename.html", form=form)
+
+#-------------------------------------------------------------------------------

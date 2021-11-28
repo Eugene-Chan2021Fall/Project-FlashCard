@@ -1,13 +1,16 @@
 {% extends "user/user_menu.html" %}
 {% block content %}
 <a href="/todo-tracker">Back</a>
-<h6>For now remove cards by their id. Drop down menu will come in the future.</h6>
 
 <form method="POST" novalidate>
 {{ form.csrf_token }}
-<p> {{ form.delete.label }} <br>
-{{ form.delete(size=10) }}</p>
+<p> {{ form.select.label }} <br>
+{{ form.select(size=10) }}</p>
+
+<p> {{ form.name.label }} <br>
+{{ form.name(size=32) }}</p>
 
 <p>{{ form.submit() }}</p>
 </form>
+
 {% endblock %}

@@ -1,8 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, FileField
-from wtforms_sqlalchemy.fields import QuerySelectField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, FileField, SelectField, SelectMultipleField
 from wtforms.validators import DataRequired
-
 
 class LoginForm(FlaskForm):
     '''
@@ -69,26 +67,8 @@ class FlashcardForm(FlaskForm):
     '''
     name = StringField('Set Name', validators=[DataRequired()])
     submit = SubmitField('Add Set')
-class FlashcardDeleteForm(FlaskForm):
-    '''
-    A form class to delete Flashcard Sets.
 
-    Parameters
-    ----------
-    FlaskForm : WTForm
-
-    Fields
-    ------
-    delete : IntegerField
-    submit : SubmitField
-
-    Returns
-    -------
-    None
-    '''
-    delete = IntegerField('Delete')
-    submit = SubmitField('Delete Set')
-class CardAddForm(FlaskForm):
+class CardForm(FlaskForm):
     '''
     A form class to add Cards to FlashCard Sets.
 
@@ -109,25 +89,6 @@ class CardAddForm(FlaskForm):
     front = StringField('Front', validators=[DataRequired()])
     back = StringField('Back', validators=[DataRequired()])
     submit = SubmitField('Add Card')
-class CardDeleteForm(FlaskForm):
-    '''
-    A form class to delete Cards to FlashCard Sets.
-
-    Parameters
-    ----------
-    FlaskForm : WTForm
-
-    Fields
-    ------
-    delete : IntegerField
-    submit : SubmitField
-
-    Returns
-    -------
-    None
-    '''
-    delete = IntegerField('Delete')
-    submit = SubmitField('Remove Card')
 
 class TaskForm(FlaskForm):
     '''
@@ -149,9 +110,9 @@ class TaskForm(FlaskForm):
     task = StringField('Task', validators=[DataRequired()])
     submit = SubmitField('Add Task')
 
-class TaskDeleteForm(FlaskForm):
+class DeleteForm(FlaskForm):
     '''
-    A form class to remove Tasks to the todo-tracker.
+    A form class to remove elements from database.
 
     Parameters
     ----------
@@ -159,15 +120,15 @@ class TaskDeleteForm(FlaskForm):
 
     Fields
     ------
-    delete : IntegerField
+    delete : SelectField
     submit : SubmitField
 
     Returns
     -------
     None
     '''
-    delete = IntegerField('Delete')
-    del_submit = SubmitField('Remove Task')
+    delete = SelectField('Select')
+    submit = SubmitField('Remove')
 
 class FileForm(FlaskForm):
     '''
@@ -188,3 +149,48 @@ class FileForm(FlaskForm):
     '''
     file = FileField('File')
     submit = SubmitField('Upload')
+
+class RenameForm(FlaskForm):
+    '''
+    A form class to rename files.
+
+    Parameters
+    ----------
+    FlaskForm : WTForm
+
+    Fields
+    ------
+    select : SelectField
+    submit : SubmitField
+
+    Returns
+    -------
+    None
+    '''
+
+    select = SelectField('Select')
+    name = StringField('New Name')
+    submit = SubmitField('Rename')
+
+class CardEditForm(FlaskForm):
+    '''
+    A form class to rename cards.
+
+    Parameters
+    ----------
+    FlaskForm : WTForm
+
+    Fields
+    ------
+    select : SelectField
+    submit : SubmitField
+
+    Returns
+    -------
+    None
+    '''
+
+    select = SelectField('Select')
+    front = StringField('Front')
+    back = StringField('Back')
+    submit = SubmitField('Rename')
