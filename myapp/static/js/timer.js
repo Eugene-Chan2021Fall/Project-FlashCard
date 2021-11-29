@@ -2,7 +2,7 @@ var start = document.getElementById('start_timer');
 var stop = document.getElementById('stop_timer');
 var inuse;
 
-//Checks if Timer is inuse.
+
 if (localStorage.getItem('inuse') == undefined || localStorage.getItem('inuse') == false){
     document.getElementById('start_timer').style.visibility = 'visible';
     document.getElementById('stop_timer').style.visibility = 'hidden';
@@ -13,9 +13,6 @@ if(localStorage.getItem('inuse')){
 }
 /**
 *   Start Timer Function
-*
-*   Parameters
-*   addEventListener('click') function activates on click
 */
 start.addEventListener('click', function(){
     localStorage.setItem('startTime', new Date().getTime());
@@ -28,28 +25,13 @@ start.addEventListener('click', function(){
 
 /**
 *   Stop Timer Function
-*
-*   Parameters
-*   addEventListener('click') function activates on click
-*
-*   Returns
-*   Sends JSON data to '/posts' route.
 */
 stop.addEventListener('click', function(){
-    var time = (new Date().getTime() - localStorage.getItem('startTime'));
-    alert("You have studied for " + Math.round(time/1000) + " seconds.");
+    var time = (new Date().getTime() - localStorage.getItem('startTime'))/1000;
+    alert("You have studied for " + time + "seconds.");
     document.getElementById('start_timer').style.visibility = 'visible';
     document.getElementById('stop_timer').style.visibility = 'hidden';
-    var xml = new XMLHttpRequest();
-    xml.open("POST", "/posts", true);
-    xml.setRequestHeader("Content-type","application/json");
-    var data = JSON.stringify({
-        "time": time
-    });
-    xml.send(data);
-
     inuse = false;
-
     localStorage.setItem('inuse', inuse);
     localStorage.clear();
 })

@@ -5,7 +5,10 @@ import os
 filemd = os.path.join(app_obj.root_path,'md')
 context_routes = []
 
-@app_obj.route("/")
+##------------------------------------
+#Render Markdown notes uing file.md
+@app_obj.route("/rendMark")
+@login_required
 def rendMark():
     if os.path.isfile(filemd):
         with open(filemd) as mdfile:
@@ -13,4 +16,4 @@ def rendMark():
                               extensions=['fenced_code','codehilite'])
               else:
                          MDContent = None
-              return render_template('rendMark.html, MDContent=MDContent, Routes=context_routes')
+              return render_template('rendMark.html, MDContent=MDContent, Routes=context_routes)
