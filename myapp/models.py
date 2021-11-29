@@ -203,6 +203,8 @@ class Flashcardshare(UserMixin, db.Model):
     id : int (Primary Key)
     flashcard_id : int
     A flashcard primary_key.
+    flashcard_name : str
+    A flashcard name.
     target : int
     Another user's primary key.
 
@@ -217,7 +219,11 @@ class Flashcardshare(UserMixin, db.Model):
 
     def __repr__(self):
         flashcard = Flashcardset.query.get(self.flashcard_id)
-        return f'Id: {flashcard.id} |{flashcard.name}|'
+        if flashcard is not None:
+            return f'Id: {flashcard.id} |{flashcard.name}|'
+        else:
+            return None
+
 
 #-------------------------------------------------------------------------------
 #Todo-tracker

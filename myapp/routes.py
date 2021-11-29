@@ -1,6 +1,6 @@
 from myapp import myapp_obj, pdf
 from myapp.convert import MarkdownConverter
-import os
+import os, markdown, pdfkit
 
 from myapp.forms import *
 
@@ -20,12 +20,39 @@ def home():
     '''
     if current_user.is_authenticated:
         name = User.query.get(current_user.get_id()).username
-        hours_tracked = HoursTracked.query.get(current_user.get_id())
-        return render_template("user/user_home.html", name = name, hours_tracked = hours_tracked)
+
+        return render_template("user/user_home.html", name = name)
     return render_template("home.html")
 
 #-------------------------------------------------------------------------------
 
+#Stats
+@myapp_obj.route("/mystats")
+def stats():
+    '''
+    This is the home route endpoint.
+
+    Returns
+    -------
+    Renders the home.html template.
+    '''
+    hours_tracked = HoursTracked.query.get(current_user.get_id())
+
+    #Calculate milisec to hours
+    time = hours_tracked.time
+    time = round(time/1000)
+    day = time // (24 * 3600)
+    time = time % (24 * 3600)
+    hour = time // 3600
+
+    #Golden stars
+    golden_stars = ""
+    num_of_stars = 0
+    for n in range(hour):
+        golden_stars +=" X "
+        num_of_stars += 1
+
+    return render_template("user/stats.html", hours_tracked = hours_tracked, golden_stars = golden_stars, num = num_of_stars)
 #Login/Sign up
 @myapp_obj.route("/login", methods=['GET', 'POST'])
 def login():
@@ -149,6 +176,7 @@ def display():
     #Getting Share List
     user = User.query.get(current_user.get_id())       #Gets current_user
     share_list = Flashcardshare.query.filter_by(target = user.username)
+
     return render_template("/flashcard/flashcard_portal.html",
     flashcards = flashcards, share_list = share_list)
 
@@ -318,8 +346,7 @@ def upload():
     mdc = MarkdownConverter
 
     if form.validate_on_submit():
-        f = secure_filename(form.file.data.filename)
-        fr= form.file.data.read().strip()
+        fr= form.file.data.read()
         list = fr.splitlines(False)
         mdc.convert(list)
     return render_template('/flashcard/flashcard_upload.html', form=form)
@@ -499,15 +526,46 @@ def notes_portal():
 
     return render_template('notes/notes_portal.html')
 
-@myapp_obj.route("/notes/<name>")
+# Notes Render
+@myapp_obj.route("/notes/render", methods=['GET', 'POST'])
 @login_required
-def notes_display(name):
+def notes_render():
     '''
-    This route shows the contents inside the User's notes.
+    This is the route to render User's markdown notes.
+
+    GET : /notes/render
+    POST : File data
 
     Returns
     -------
-    Renders the notes_display.html template.
+    Renders the notes_render.html template.
+    '''
+    html = ""
+    form = FileForm()
+    if form.validate_on_submit():
+        text = form.file.data.read()
+        newtext = str(text).replace("<p>b'", '').replace("'</p>",'')    # Reads Markdown and Displays as string
+        html = newtext[4:-3].split('\\n')
+    return render_template('notes/notes_render.html', form=form, html = html)
+
+# Notes Markdown to Pdf
+@myapp_obj.route("/notes/mark-to-pdf", methods=['GET', 'POST'])
+@login_required
+def notes_renderer():
+    '''
+    This is the route to take Markdown files and convert them to PDF.
+
+    GET : /notes/mark-to-pdf
+    POST : File data
+
+    Returns
+    -------
+    Renders the notes_marktopdf.html template.
     '''
 
-    return render_template('notes/notes_portal.html')
+    form = FileForm()
+    if form.validate_on_submit():
+        text = form.file.data.read()
+        text = str(text).replace("<p>b'", '').replace("'</p>",'')    # Reads Markdown and Displays as string
+        pdfkit.from_string(text, 'note.pdf')
+    return render_template('notes/notes_marktopdf.html', form=form)
