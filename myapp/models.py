@@ -40,6 +40,7 @@ class User(UserMixin, db.Model):
     flashcard_set = db.relationship('Flashcardset', backref='author', lazy=True)
     tasks = db.relationship('Task', backref='author', lazy=True)
     notes = db.relationship('Note', backref='author', lazy=True)
+    study_time = db.relationship('HoursTracked', backref='author', lazy=True)
 
     def set_password(self, password):
         '''
@@ -75,14 +76,54 @@ class User(UserMixin, db.Model):
         return f'<User {self.id}: {self.username}> |Sets : {self.flashcard_set}| Tasks: {self.tasks}'
 
 #-------------------------------------------------------------------------------
-#Flashcards
-'''
-WIP Sharing Model
-class FlashcardSupport(db.Model):
-    #Table that takes user_id to see what users should have access to certain flashcards
+#Time
+
+class HoursTracked(UserMixin, db.Model):
+    '''
+    A class that represents the time a User has spent studying.
+
+    Parameters
+    ----------
+    UserMixin : login tracker
+    db.Model : db
+    SQLalchemy database model.
+
+    Model
+    -----
+    id : int (Primary Key)
+
+    author_id : int (Foreign Key) --> flashcard_set (class User)
+    Relationship with User class.
+
+    time : int
+    Total time studied.
+
+    Returns
+    -------
+    None
+    '''
+    #Flashcard set model that takes cards and puts them into a set.
+    id = db.Column(db.Integer, primary_key=True)
+    time = db.Column(db.Integer)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    set_id = db.(db.Integer, db.ForeignKey('flashcardset.id'))
-'''
+
+
+    def __repr__(self):
+        #Mathematical Representation of time from seconds
+        time = round(self.time/1000)
+        day = time // (24 * 3600)
+        time = time % (24 * 3600)
+        hour = time // 3600
+        time %= 3600
+        mins = time // 60
+        time %= 60
+        secs = time
+        return f'ID: {self.id} |Days: {day} Hours: {hour} Mins: {mins} Secs: {secs}'
+
+
+
+#-------------------------------------------------------------------------------
+#Flashcards
 
 class Flashcardset(UserMixin, db.Model):
     '''
@@ -98,7 +139,7 @@ class Flashcardset(UserMixin, db.Model):
     -----
     id : int (Primary Key)
     author_id : int (Foreign Key) --> flashcard_set (class User)
-    author_id : int (Foreign Key) --> share (class Flashcardshare)
+    share_id : int (Foreign Key) --> share (class Flashcardshare)
     name : str
     cards : class Card --> set_id (Foreign Key)
 

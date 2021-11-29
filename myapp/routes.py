@@ -4,7 +4,7 @@ import os
 
 from myapp.forms import *
 
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request
 from myapp import db
 from myapp.models import *
 from flask_login import current_user, login_user, logout_user, login_required
@@ -20,7 +20,8 @@ def home():
     '''
     if current_user.is_authenticated:
         name = User.query.get(current_user.get_id()).username
-        return render_template("user/user_home.html", name = name)
+        hours_tracked = HoursTracked.query.get(current_user.get_id())
+        return render_template("user/user_home.html", name = name, hours_tracked = hours_tracked)
     return render_template("home.html")
 
 #-------------------------------------------------------------------------------
@@ -90,6 +91,10 @@ def signup():
             user.set_password(form.password.data)
             db.session.add(user)
             db.session.commit()
+            #Initalize Time studied
+            hour_tracker = HoursTracked(time = 0, author_id = user.id)
+            db.session.add(hour_tracker)
+            db.session.commit()
             flash('Registration successful')
     return render_template("login_templates/signup.html", form = form)
 
@@ -107,6 +112,25 @@ def pomodoro():
     Renders the pomodoro_timer.html template.
     '''
     return render_template("user/pomodoro_timer.html")
+
+#-------------------------------------------------------------------------------
+#Timer
+@myapp_obj.route("/posts", methods=['POST'])
+def posts():
+    '''
+    This is a route that handles POST request from the user menu study timer.
+
+    Returns
+    -------
+    Study session time.
+    '''
+    jsonobj = request.get_json()
+    milisec = int(jsonobj["time"])
+    hour_tracker = HoursTracked.query.get(current_user.get_id())
+    hour_tracker.time += milisec
+    db.session.commit()
+
+    return '200'
 
 
 #-------------------------------------------------------------------------------
