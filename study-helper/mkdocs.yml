@@ -4,3 +4,9 @@ nav:
     - Home: index.md
     - Documentation: documentation.md
     - About: about.md
+pages:
+    - MarkdownConverter : MarkdownConverter.md
+    - LoginForm : LoginForm.md
+    - SignupForm : SignupForm.md
+    - FlashcardForm : FlashcardForm.md
+theme: readthedocs

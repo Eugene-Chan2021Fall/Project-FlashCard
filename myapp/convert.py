@@ -5,33 +5,36 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 class MarkdownConverter:
     '''
-        A class which is a MarkdownConverter.
+    A class that converts Markdown Files and formats it into flashcards.
 
-        Methods
-        -------
-        read():
-            Reads a markdown file.
+    Methods
+    -------
+    read():
+    Reads a markdown file.
+
+    convert(list):
+    Takes a list and converts it into flashcard format.
     '''
 
     def read(read, file):
-        '''
-            Reads markdown file.
+    '''
+    Reads markdown file.
 
-            Parameters
-            ----------
-            file : str
-            a file directory
+    Parameters
+    ----------
+    file : str
+    a file directory
 
-            read : str
-            param to pass into the read function
+    read : str
+    param to pass into the read function
 
-            Return
-            ------
-            list : list
-            Takes the information being read and splits it into a list to be
-            handled by the convert method.
+    Return
+    ------
+    list : list
+    Takes the information being read and splits it into a list to be
+    handled by the convert method.
 
-        '''
+    '''
         f = open(file, 'r')
         text = f.read()
         f.close()
@@ -40,39 +43,39 @@ class MarkdownConverter:
         return list
 
     def convert(list):
-        '''
-            Converts markdown file and adds it to the database.
+    '''
+    Converts markdown file and adds it to the database.
 
-            Parameters
-            ----------
-            list : list
-            a list full of strings that represent the flashcard set
+    Parameters
+    ----------
+    list : list
+    a list full of strings that represent the flashcard set
 
-            read : str
-            param to pass into the read function
+    read : str
+    param to pass into the read function
 
-            Returns
-            -------
-            None
+    Returns
+    -------
+    None
 
-            Example
-            -------
-            Files must be provided in this format.
-            Each card must have a front and back or else the program will not accept
-            the markdown file.
+    Example
+    -------
+    Files must be provided in this format.
+    Each card must have a front and back or else the program will not accept
+    the markdown file.
 
-            #Title of flashcard set
-            front
-            back
+    #Title of flashcard set
+    front
+    back
 
-            Ex:1
-            #Homework Flashcard set
-            Apple
-            A red fruit used for apple pie.
-            Kiwi
-            Green fruit that is green.
+    Ex:1
+    #Homework Flashcard set
+    Apple
+    A red fruit used for apple pie.
+    Kiwi
+    Green fruit that is green.
 
-        '''
+    '''
         set = None   #flashcard set_id
         if len(list) == 0:  #checks for empty list
             flash('empty')

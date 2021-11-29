@@ -67,7 +67,6 @@ class FlashcardForm(FlaskForm):
     '''
     name = StringField('Set Name', validators=[DataRequired()])
     submit = SubmitField('Add Set')
-
 class CardForm(FlaskForm):
     '''
     A form class to add Cards to FlashCard Sets.
@@ -89,7 +88,6 @@ class CardForm(FlaskForm):
     front = StringField('Front', validators=[DataRequired()])
     back = StringField('Back', validators=[DataRequired()])
     submit = SubmitField('Add Card')
-
 class TaskForm(FlaskForm):
     '''
     A form class to add Tasks to the todo-tracker.
@@ -109,7 +107,6 @@ class TaskForm(FlaskForm):
     '''
     task = StringField('Task', validators=[DataRequired()])
     submit = SubmitField('Add Task')
-
 class DeleteForm(FlaskForm):
     '''
     A form class to remove elements from database.
@@ -129,7 +126,6 @@ class DeleteForm(FlaskForm):
     '''
     delete = SelectField('Select')
     submit = SubmitField('Remove')
-
 class FileForm(FlaskForm):
     '''
     A form class upload files to Flashcard Sets.
@@ -149,7 +145,6 @@ class FileForm(FlaskForm):
     '''
     file = FileField('File')
     submit = SubmitField('Upload')
-
 class RenameForm(FlaskForm):
     '''
     A form class to rename files.
@@ -171,7 +166,6 @@ class RenameForm(FlaskForm):
     select = SelectField('Select')
     name = StringField('New Name')
     submit = SubmitField('Rename')
-
 class CardEditForm(FlaskForm):
     '''
     A form class to rename cards.
@@ -194,7 +188,6 @@ class CardEditForm(FlaskForm):
     front = StringField('Front')
     back = StringField('Back')
     submit = SubmitField('Rename')
-
 class ShareForm(FlaskForm):
     '''
     A form class to share files to other Users.
