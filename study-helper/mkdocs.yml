@@ -4,3 +4,16 @@ nav:
     - Home: index.md
     - Documentation: documentation.md
     - About: about.md
+pages:
+    - MarkdownConverter : MarkdownConverter.md
+    - LoginForm : LoginForm.md
+    - SignupForm : SignupForm.md
+    - FlashcardForm : FlashcardForm.md
+    - CardForm : CardForm.md
+    - TaskForm : TaskForm.md
+    - DeleteForm : DeleteForm.md
+    - FileForm : FileForm.md
+    - RenameForm : RenameForm.md
+    - CardEditForm : FlashcardForm.md
+    - ShareForm : FlashcardForm.md
+theme: readthedocs
