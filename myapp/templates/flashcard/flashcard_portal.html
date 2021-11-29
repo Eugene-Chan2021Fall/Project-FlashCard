@@ -4,11 +4,23 @@
 <a href="/flashcard/delete">Delete Flashcard Set</a>
 <a href="/flashcard/upload">Upload a Flashcard Set</a>
 <a href="/flashcard/rename">Edit Flashcard Sets</a>
+<a href="/flashcard/share">Share Flashcard Sets</a>
 <p>My Flashcards</p>
 <ul>
 {% for cards in flashcards %}
     <li>
     <a href="/flashcard/display/{{ cards.name }}-{{ cards.id }}">{{ cards }}</a>
+    </li>
+
+{% endfor %}
+</ul>
+
+<p>Shared with me:</p>
+
+<ul>
+{% for cards in share_list %}
+    <li>
+    <a href="/flashcard/display/{{ cards.flashcard_name }}-{{ cards.flashcard_id }}">{{ cards }}</a>
     </li>
 
 {% endfor %}
