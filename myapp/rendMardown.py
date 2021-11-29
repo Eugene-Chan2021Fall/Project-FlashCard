@@ -16,4 +16,4 @@ def rendMark():
                               extensions=['fenced_code','codehilite'])
               else:
                          MDContent = None
-              return render_template('rendMark.html, MDContent=MDContent, Routes=context_routes)
+              return render_template('rendMark.html', MDContent=MDContent, Routes=context_routes)
