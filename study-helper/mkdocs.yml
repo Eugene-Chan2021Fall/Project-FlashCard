@@ -9,4 +9,11 @@ pages:
     - LoginForm : LoginForm.md
     - SignupForm : SignupForm.md
     - FlashcardForm : FlashcardForm.md
+    - CardForm : CardForm.md
+    - TaskForm : TaskForm.md
+    - DeleteForm : DeleteForm.md
+    - FileForm : FileForm.md
+    - RenameForm : RenameForm.md
+    - CardEditForm : FlashcardForm.md
+    - ShareForm : FlashcardForm.md
 theme: readthedocs
