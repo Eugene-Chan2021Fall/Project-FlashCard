@@ -1,9 +1,4 @@
-import pdfkit
-from myapp import myapp_obj
-from flask import request, render_template
-
-@myapp_obj.route('/mindmap')
-def contact():
+#def contact():
     '''
     Route that exports mindmap as a pdf.
 
