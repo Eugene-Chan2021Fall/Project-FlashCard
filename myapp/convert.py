@@ -17,7 +17,7 @@ class MarkdownConverter:
     '''
 
     def read(read, file):
-    '''
+     '''
     Reads markdown file.
 
     Parameters
@@ -31,19 +31,18 @@ class MarkdownConverter:
     Return
     ------
     list : list
-    Takes the information being read and splits it into a list to be
-    handled by the convert method.
+    Takes the information being read and splits it into a list to be handled by the convert method.
+     '''
+        
+     f = open(file, 'r')
+     text = f.read()
+     f.close()
 
-    '''
-        f = open(file, 'r')
-        text = f.read()
-        f.close()
-
-        list = text.splitlines()
-        return list
+     list = text.splitlines()
+     return list
 
     def convert(list):
-    '''
+        '''
     Converts markdown file and adds it to the database.
 
     Parameters
@@ -74,8 +73,7 @@ class MarkdownConverter:
     A red fruit used for apple pie.
     Kiwi
     Green fruit that is green.
-
-    '''
+        '''
         set = None   #flashcard set_id
         if len(list) == 0:  #checks for empty list
             flash('empty')
