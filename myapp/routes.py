@@ -1,4 +1,4 @@
-from myapp import myapp_obj, pdf
+from myapp import myapp_obj
 from myapp.convert import MarkdownConverter
 import os, markdown, pdfkit
 import pandas as pd
@@ -586,7 +586,7 @@ def mindap_pdf():
     g.add_edge(3, 4)
     g.add_edge(1, 4)
     g.add_edge(1, 5)
-    
+
     nx.draw(g, with_labels = True)
     plt.savefig("plot.png")
 

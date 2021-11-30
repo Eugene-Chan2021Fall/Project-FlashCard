@@ -20,11 +20,15 @@ grades!
 
 Run these commands if these have not been installed on your system.
 ```
+sudo apt install python3.8
+sudo apt install python3-pandas
 sudo apt install pip3
 sudo apt install wtfforms
 sudo apt install flask
 pip install pdfkit
 pip install markdown
+pip install networkx[default]
+
 ```
 
 After finishing installing all these python packages, run
