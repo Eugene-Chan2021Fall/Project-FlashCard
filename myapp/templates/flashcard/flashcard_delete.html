@@ -1,21 +1,14 @@
 {% extends "user/user_menu.html" %}
 {% block content %}
 <a href="/flashcard">Back</a>
-<h6>For now remove cards by their id. Drop down menu will come in the future.</h6>
+
 <form method="POST" novalidate>
     {{ form.hidden_tag() }}
 
     <p> {{ form.delete.label }} <br>
-    {{ form.delete(size=32) }}</p>
+    {{ form.delete(size=10) }}</p>
 
     <p>{{ form.submit() }}</p>
 </form>
-
-<ul>
-{% for cards in flashcards %}
-    <li>{{ cards }}</li>
-{% endfor %}
-
-</ul>
 
 {% endblock %}
