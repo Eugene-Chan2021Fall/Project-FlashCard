@@ -44,5 +44,5 @@ pages:
     - notes_portal : notes_portal.md
     - notes_render : notes_render.md
     - notes_renderer : notes_renderer.md
-    - mindmap_pdf: mindmap_pdf.md
+    - mindmap: mindmap.md
 theme: readthedocs

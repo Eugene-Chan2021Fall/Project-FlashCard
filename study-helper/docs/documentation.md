@@ -39,9 +39,12 @@
 [class Noteshare:](/Noteshare)<br>
 
 #routes.py
-    from myapp import myapp_obj, pdf
+    from myapp import myapp_obj
     from myapp.convert import MarkdownConverter
     import os, markdown, pdfkit
+    import pandas as pd
+    import networkx as nx
+    import matplotlib.pyplot as plt
 
     from myapp.forms import *
 
@@ -70,9 +73,4 @@
 [def notes_portal():](/notes_portal)<br>
 [def notes_render():](/notes_render)<br>
 [def notes_renderer:](/notes_renderer)<br>
-
-#pdf.py
-    import pdfkit
-    from myapp import myapp_obj
-    from flask import request, render_template
-[def contact():](/contact)<br>
+[def mindmap_pdf():](/mindmap)<br>

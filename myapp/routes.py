@@ -577,8 +577,8 @@ def notes_renderer():
 #Make mindmap and save it to png file
 @myapp_obj.route("/mindmap")
 @login_required
-def mindap_pdf():
-        '''
+def mindmap_pdf():
+    '''
     This is the route to make mindmap.
 
     Returns
