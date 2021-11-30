@@ -1,6 +1,10 @@
-from myapp import myapp_obj, pdf
+from myapp import myapp_obj
 from myapp.convert import MarkdownConverter
+
 import os, markdown, pdfkit
+import pandas as pd
+import networkx as nx
+import matplotlib.pyplot as plt
 
 from myapp.forms import *
 
@@ -8,6 +12,7 @@ from flask import render_template, flash, redirect, url_for, request
 from myapp import db
 from myapp.models import *
 from flask_login import current_user, login_user, logout_user, login_required
+
 #Home
 @myapp_obj.route("/")
 def home():
@@ -161,6 +166,7 @@ def posts():
 
 
 #-------------------------------------------------------------------------------
+
 #Flashcards
 @myapp_obj.route("/flashcard")
 @login_required
@@ -569,3 +575,21 @@ def notes_renderer():
         text = str(text).replace("<p>b'", '').replace("'</p>",'')    # Reads Markdown and Displays as string
         pdfkit.from_string(text, 'note.pdf')
     return render_template('notes/notes_marktopdf.html', form=form)
+
+#Make mindmap and save it to png file
+@myapp_obj.route("/mindmap", methods=['GET', 'POST'])
+@login_required
+def mindap_pdf():
+    g = nx.Graph()
+    # flashcards = Flashcardset.query.filter_by(author_id = current_user.get_id()).get(1)
+    # g.add_nodes_from(flashcards)
+    g.add_edge(1, 2)
+    g.add_edge(2, 3)
+    g.add_edge(3, 4)
+    g.add_edge(1, 4)
+    g.add_edge(1, 5)
+    
+    nx.draw(g, with_labels = True)
+    plt.savefig("plot.png")
+
+    return render_template("mindmap.html")
