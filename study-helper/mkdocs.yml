@@ -2,4 +2,47 @@ site_name: Study Helper
 site_url: https://study-helper.com
 nav:
     - Home: index.md
-    - About: about.md
+    - Documentation: documentation.md
+pages:
+    - MarkdownConverter : MarkdownConverter.md
+    - LoginForm : LoginForm.md
+    - SignupForm : SignupForm.md
+    - FlashcardForm : FlashcardForm.md
+    - CardForm : CardForm.md
+    - TaskForm : TaskForm.md
+    - DeleteForm : DeleteForm.md
+    - FileForm : FileForm.md
+    - RenameForm : RenameForm.md
+    - CardEditForm : FlashcardForm.md
+    - ShareForm : FlashcardForm.md
+    - User : User.md
+    - HoursTracked : HoursTracked.md
+    - Flashcardset : Flashcardset.md
+    - Card : Card.md
+    - Flashcardshare : Flashcardshare.md
+    - Task : Task.md
+    - Note : Note.md
+    - Noteshare : Noteshare.md
+    - def load_user(id) : load_user.md
+    - home : home.md
+    - stats : stats.md
+    - login : login.md
+    - logout : logout.md
+    - signup : signup.md
+    - pomodoro : pomodoro.md
+    - posts : posts.md
+    - display : display.md
+    - flashcard : flashcard.md
+    - create_sets : create_sets.md
+    - delete_sets : delete_sets.md
+    - upload : upload.md
+    - rename_sets : rename_sets.md
+    - flashcard_share : flashcard_share.md
+    - todo_tracker : todo_tracker.md
+    - todo_tracker_delete : todo_tracker_delete.md
+    - rename_tasks : rename_tasks.md
+    - notes_portal : notes_portal.md
+    - notes_render : notes_render.md
+    - notes_renderer : notes_renderer.md
+    - contact : contact.md
+theme: readthedocs
