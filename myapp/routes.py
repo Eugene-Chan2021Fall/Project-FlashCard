@@ -575,9 +575,16 @@ def notes_renderer():
     return render_template('notes/notes_marktopdf.html', form=form)
 
 #Make mindmap and save it to png file
-@myapp_obj.route("/mindmap", methods=['GET', 'POST'])
+@myapp_obj.route("/mindmap")
 @login_required
 def mindap_pdf():
+        '''
+    This is the route to make mindmap.
+
+    Returns
+    -------
+    Renders the mindmap.html template.
+    '''
     g = nx.Graph()
     # flashcards = Flashcardset.query.filter_by(author_id = current_user.get_id()).get(1)
     # g.add_nodes_from(flashcards)
