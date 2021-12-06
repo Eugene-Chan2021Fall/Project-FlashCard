@@ -7,6 +7,9 @@
     <a>
     </head>
     <body>
+        <p>Welcome to Study Helper!<p>
+            <p>If you want to use Study Helper, Login or Sign up
+        </p>
         <!--User Menu-->
         {% if current_user.is_authenticated %}
             {% block menu %}
@@ -26,11 +29,14 @@
 	{% block content %}
 	{% endblock %}
     <!--adding Search textboxes-->
-    <form class="form-inline my-2 my-lg-0" method="GET">
-         <input class="form-control mr-sm-2"
-         type="search" placeholder="Search" name="q">
-         <button class="btn btn-outline-success my-2 my-sm-0"
-         type="submit">Search</button>
-    </form>
+    <div class="search">
+        <form class="form-inline my-2 my-lg-0" method="GET">
+            <input class="form-control mr-sm-2"
+            type="search" placeholder="Search" name="q">
+            <button class="btn btn-outline-success my-2 my-sm-0"
+            type="submit">Search</button>
+        </form>
+    </div>
+  
     </body>
 </html>
