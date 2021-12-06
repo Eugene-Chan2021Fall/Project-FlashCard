@@ -14,8 +14,10 @@
 
     <p> {{ form.password.label }} <br>
     {{ form.password(size=32) }}</p>
+    <ul>
+        <a href="/login">Back to Login</a>
+        <p>{{ form.submit() }}</p>
+    </ul>
 
-    <a href="/login">Back to Login</a>
-    <p>{{ form.submit() }}</p>
 </form>
 {% endblock %}
