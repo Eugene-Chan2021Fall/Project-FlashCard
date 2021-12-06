@@ -15,6 +15,7 @@ pages:
     - RenameForm : RenameForm.md
     - CardEditForm : FlashcardForm.md
     - ShareForm : FlashcardForm.md
+    - RenderForm : RenderForm.md
     - User : User.md
     - HoursTracked : HoursTracked.md
     - Flashcardset : Flashcardset.md
@@ -28,6 +29,7 @@ pages:
     - stats : stats.md
     - login : login.md
     - logout : logout.md
+    - delete : delete.md
     - signup : signup.md
     - pomodoro : pomodoro.md
     - posts : posts.md
@@ -44,5 +46,8 @@ pages:
     - notes_portal : notes_portal.md
     - notes_render : notes_render.md
     - notes_renderer : notes_renderer.md
+    - notes_add : notes_add.md
+    - notes_share : notes_share.md
+    - notes_view : notes_view.md
     - mindmap: mindmap.md
 theme: readthedocs

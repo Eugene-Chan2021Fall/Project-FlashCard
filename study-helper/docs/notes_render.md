@@ -10,9 +10,13 @@
     Renders the notes_render.html template.
     '''
     html = ""
-    form = FileForm()
+    list = Note.query.filter_by(author_id = current_user.get_id())
+    form = RenderForm()
+    form.select.choices = [(g.id, g.name) for g in list] #Refresh Choice
+
     if form.validate_on_submit():
-        text = form.file.data.read()
+        note = Note.query.get(form.select.data)
+        text = note.note
         newtext = str(text).replace("<p>b'", '').replace("'</p>",'')    # Reads Markdown and Displays as string
         html = newtext[4:-3].split('\\n')
     return render_template('notes/notes_render.html', form=form, html = html)

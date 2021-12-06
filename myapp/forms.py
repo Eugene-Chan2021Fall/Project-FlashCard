@@ -148,6 +148,7 @@ class FileForm(FlaskForm):
     None
     '''
     file = FileField('File')
+    name = StringField('Name')
     submit = SubmitField('Upload')
 
 class RenameForm(FlaskForm):
@@ -206,6 +207,7 @@ class ShareForm(FlaskForm):
     Fields
     ------
     target : StringField
+    target : StringField
     submit : SubmitField
 
     Returns
@@ -215,3 +217,23 @@ class ShareForm(FlaskForm):
     select = SelectField('Select')
     target = StringField('Target')
     submit = SubmitField('Share')
+
+class RenderForm(FlaskForm):
+    '''
+    A form that renders markdown Files.
+
+    Parameters
+    ----------
+    FlaskForm : WTForm
+
+    Fields
+    ------
+    target : StringField
+    submit : SubmitField
+
+    Returns
+    -------
+    None
+    '''
+    select = SelectField('Select')
+    submit = SubmitField('Render')

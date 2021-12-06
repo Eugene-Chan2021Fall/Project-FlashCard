@@ -95,6 +95,22 @@ def logout():
     logout_user()
     return redirect("/")
 
+@myapp_obj.route("/delete")
+def delete():
+    '''
+    This is the delete route endpoint.
+
+    Returns
+    -------
+    Redirects back to the home directory.
+    '''
+    user = User.query.get(current_user.get_id())
+    logout_user()
+    db.session.delete(user)
+    db.session.commit()
+    flash(f'{user.username} has been deleted.')
+    return redirect("/")
+
 @myapp_obj.route("/signup", methods=['GET', 'POST'])
 def signup():
     '''
@@ -421,7 +437,6 @@ def flashcard_share():
             share = Flashcardshare(target = form.target.data, flashcard_id = form.select.data, flashcard_name = flashcard.name)
             db.session.add(share)
             db.session.commit()
-            flash(f'Flashcard shared to {form.select.data}.')
             flash(f'Flashcard shared to {form.target.data}.')
     return render_template('/flashcard/flashcard_share.html', form=form)
 
@@ -527,8 +542,10 @@ def notes_portal():
     -------
     Renders the notes_portal.html template.
     '''
-
-    return render_template('notes/notes_portal.html')
+    list = Note.query.filter_by(author_id = current_user.get_id())
+    user = User.query.get(current_user.get_id())
+    shareList = Noteshare.query.filter_by(target = user.username)
+    return render_template('notes/notes_portal.html', list=list, shareList=shareList)
 
 # Notes Render
 @myapp_obj.route("/notes/render", methods=['GET', 'POST'])
@@ -545,9 +562,13 @@ def notes_render():
     Renders the notes_render.html template.
     '''
     html = ""
-    form = FileForm()
+    list = Note.query.filter_by(author_id = current_user.get_id())
+    form = RenderForm()
+    form.select.choices = [(g.id, g.name) for g in list] #Refresh Choice
+
     if form.validate_on_submit():
-        text = form.file.data.read()
+        note = Note.query.get(form.select.data)
+        text = note.note
         newtext = str(text).replace("<p>b'", '').replace("'</p>",'')    # Reads Markdown and Displays as string
         html = newtext[4:-3].split('\\n')
     return render_template('notes/notes_render.html', form=form, html = html)
@@ -573,6 +594,96 @@ def notes_renderer():
         text = str(text).replace("<p>b'", '').replace("'</p>",'')    # Reads Markdown and Displays as string
         pdfkit.from_string(text, 'note.pdf')
     return render_template('notes/notes_marktopdf.html', form=form)
+
+# Notes Markdown to Pdf
+@myapp_obj.route("/notes/add", methods=['GET', 'POST'])
+@login_required
+def notes_add():
+    '''
+    This is the route to add Markdown file notes to the database.
+
+    GET : /notes/adds
+    POST : File data
+
+    Returns
+    -------
+    Renders the notes_add.html template.
+    '''
+
+    form = FileForm()
+    if form.validate_on_submit():
+        if len(form.name.data) == 0:
+            flash('Empty name')
+        else:
+            text = form.file.data.read()
+            newtext = str(text).replace("<p>b'", '').replace("'</p>",'')    # Reads Markdown and Displays as string
+            n = Note(note = text, author_id = current_user.get_id(), name = form.name.data)
+            db.session.add(n)
+            db.session.commit()
+
+
+    return render_template('notes/notes_add.html', form=form)
+
+# Share notes to others
+@myapp_obj.route("/notes/share", methods=['GET', 'POST'])
+@login_required
+def notes_share():
+    '''
+    This is the route allows Users to share notes to other users.
+
+    GET : /notes/share
+    POST : Note
+
+    Returns
+    -------
+    Renders the notes_share.html template.
+    '''
+
+    form = ShareForm()
+    list = Note.query.filter_by(author_id = current_user.get_id())
+    form.select.choices = [(g.id, g.name) for g in list] #Refresh Choices
+
+    if form.validate_on_submit:
+        checkName = User.query.filter_by(username = form.target.data)
+        if checkName is None:
+            flash('User not found.')
+        elif form.select.data is None:
+            flash('Pick a set')
+        else:
+            note = Note.query.get(form.select.data)
+            share = Noteshare(target = form.target.data, note_id = form.select.data, note_name = note.name)
+            db.session.add(share)
+            db.session.commit()
+            flash(f'Flashcard shared to {form.target.data}.')
+
+    return render_template('notes/notes_share.html', form=form)
+
+# Notes View Shared
+@myapp_obj.route("/notes/view", methods=['GET', 'POST'])
+@login_required
+def notes_view():
+    '''
+    This is the route to render other User's note shared to you.
+
+    GET : /notes/view
+    POST : Note
+
+    Returns
+    -------
+    Renders the notes_render.html template.
+    '''
+    html = ""
+    user = User.query.get(current_user.get_id())
+    list = Noteshare.query.filter_by(target = user.username)
+    form = RenderForm()
+    form.select.choices = [(g.note_id, g.note_name) for g in list] #Refresh Choice
+
+    if form.validate_on_submit():
+        note = Note.query.get(form.select.data)
+        text = note.note
+        newtext = str(text).replace("<p>b'", '').replace("'</p>",'')    # Reads Markdown and Displays as string
+        html = newtext[4:-3].split('\\n')
+    return render_template('notes/notes_render.html', form=form, html=html)
 
 #Make mindmap and save it to png file
 @myapp_obj.route("/mindmap")

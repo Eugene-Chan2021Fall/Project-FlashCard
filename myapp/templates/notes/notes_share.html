@@ -1,0 +1,17 @@
+{% extends "user/user_menu.html" %}
+{% block content %}
+
+<a href='/notes'>Back </a>
+
+<form method="POST" novalidate>
+{{ form.csrf_token }}
+<p> {{ form.select.label }} <br>
+{{ form.select(size=10) }}</p>
+
+<p> {{ form.target.label }} <br>
+{{ form.target(size=32) }}</p>
+
+<p>{{ form.submit() }}</p>
+</form>
+
+{% endblock %}

@@ -2,4 +2,20 @@
 {% block content %}
 <a href='/notes/render'>Render Markdown Notes</a>
 <a href='/notes/mark-to-pdf'>Markdown to PDF</a>
+<a href='/notes/add'<a>Add Notes</a>
+<a href='/notes/share'>Share notes</a>
+
+<br>
+<br>
+<p>My Notes:</p>
+{% for note in list %}
+    {{note}}<br>
+{% endfor %}
+
+<p>Shared with me:</p>
+<a href='/notes/view'>View shared notes</a>
+<br>
+{% for note in shareList %}
+    {{note}}<br>
+{% endfor %}
 {% endblock %}

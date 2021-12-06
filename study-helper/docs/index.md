@@ -6,6 +6,8 @@ grades!
 ###Features
 - Login/Signup Feature!
 + Pomodoro timer
++ Flashcards to PDF
++ Add/Share Markdown Notes
 + Rename Files using Regular Expression
 + Track Hours Worked
 + Visualized Hours Worked
@@ -83,9 +85,11 @@ python3 run.py
     │       │   └── signup.html
     │       ├── mindmap.html
     │       ├── notes           -------Notes HTML templates
+    │       |   ├── notes_add.html
     │       │   ├── notes_marktopdf.html
     │       │   ├── notes_portal.html
-    │       │   └── notes_render.html
+    │       │   ├── notes_render.html
+    │       │   └── notes_share.html
     │       ├── rendMark.html
     │       └── user   ---------------User HTML templates
     │           ├── pomodoro_timer.html

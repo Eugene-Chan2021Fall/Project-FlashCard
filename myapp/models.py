@@ -278,12 +278,13 @@ class Note(UserMixin, db.Model):
     None
     '''
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128))
     note = db.Column(db.String(1024), index=True)
     share_id = db.Column(db.Integer)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return f'Id: {self.id} |{self.note}|'
+        return f'Id: {self.id} |{self.name}|'
 
 class Noteshare(UserMixin, db.Model):
     '''
@@ -309,9 +310,11 @@ class Noteshare(UserMixin, db.Model):
     '''
     id = db.Column(db.Integer, primary_key=True)
     note_id = db.Column(db.Integer)
-    note_name = db.Column(db.Integer)
+    note_name = db.Column(db.String)
     target = db.Column(db.Integer)
 
+    def __repr__(self):
+        return f'Id: {self.note_id} |{self.note_name}|'
 
 @login.user_loader
 def load_user(id):

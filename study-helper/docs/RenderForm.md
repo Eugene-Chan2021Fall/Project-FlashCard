@@ -1,6 +1,6 @@
-#class ShareForm(FlaskForm):
+#class RenderForm(FlaskForm):
     '''
-    A form class to share files to other Users.
+    A form that renders markdown Files.
 
     Parameters
     ----------
@@ -8,7 +8,6 @@
 
     Fields
     ------
-    select : SelectField
     target : StringField
     submit : SubmitField
 
@@ -17,5 +16,4 @@
     None
     '''
     select = SelectField('Select')
-    target = StringField('Target')
-    submit = SubmitField('Share')
+    submit = SubmitField('Render')

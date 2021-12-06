@@ -20,6 +20,7 @@
 [class RenameForm:](/RenameForm)<br>
 [class CardEditForm:](/CardEditForm)<br>
 [class ShareForm:](/ShareForm)<br>
+[class RenderForm:](/RenderForm)<br>
 
 #models.py
     from myapp import db
@@ -57,6 +58,7 @@
 [def stats():](/stats)<br>
 [def login():](/login)<br>
 [def logout():](/logout)<br>
+[def delete():](/delete)<br>
 [def signup():](/signup)<br>
 [def pomodoro():](/pomodoro)<br>
 [def posts():](/posts)<br>
@@ -73,4 +75,7 @@
 [def notes_portal():](/notes_portal)<br>
 [def notes_render():](/notes_render)<br>
 [def notes_renderer:](/notes_renderer)<br>
+[def notes_add:](/notes_add)<br>
+[def notes_share:](/notes_share)<br>
+[def notes_view:](/notes_view)<br>
 [def mindmap_pdf():](/mindmap)<br>

@@ -22,5 +22,5 @@
     '''
     id = db.Column(db.Integer, primary_key=True)
     note_id = db.Column(db.Integer)
-    note_name = db.Column(db.Integer)
+    note_name = db.Column(db.String)
     target = db.Column(db.Integer)

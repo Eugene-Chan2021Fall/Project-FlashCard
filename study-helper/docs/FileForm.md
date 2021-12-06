@@ -16,4 +16,5 @@
     None
     '''
     file = FileField('File')
+    name = StringField('Name')
     submit = SubmitField('Upload')
