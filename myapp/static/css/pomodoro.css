@@ -1,7 +1,3 @@
-body {
-  margin: 20;
-  padding: 10;
-}
 
 .work-timer p{
     display: inline;
@@ -14,4 +10,30 @@ body {
 .btn{
     margin-top: 10px;
     display : inline;
+}
+body {
+    background-color: #ffcba4;
+}
+h1 {
+    text-align: center;
+}
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+ul a {
+    font-weight: bold;
+    font-size: 20px;
+}
+p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
