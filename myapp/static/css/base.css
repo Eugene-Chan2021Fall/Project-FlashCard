@@ -1,0 +1,31 @@
+
+head {
+    margin-top: 100px;
+}
+body {
+    background-color: #ffcba4;
+}
+
+.container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.signup-login a{
+    text-align: right;
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+a {
+    display:block;
+    text-align: center;
+}
