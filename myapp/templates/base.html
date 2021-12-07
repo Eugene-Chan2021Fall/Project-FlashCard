@@ -21,7 +21,7 @@
     <!--Navbar-->
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand">Study Helper</a>
+        <a href="/" class="navbar-brand">Study Helper</a>
         <div class="signup-login">
             <a class="btn btn-outline-primary" href="/login" role="button">Login</a>
             <a class="btn btn-outline-primary" href="/signup" role="button">Sign up</a>
@@ -34,7 +34,9 @@
         {% if messages %}
         <ul>
             {% for m in messages %}
-            <li>{{ m }}</li>
+            <div class="alert alert-light" role="alert" display-inline-block>
+                {{ m }}
+            </div>
             {% endfor %}
         </ul>
         {% endif %}

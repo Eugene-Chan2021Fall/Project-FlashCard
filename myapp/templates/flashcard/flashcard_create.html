@@ -1,5 +1,8 @@
 {% extends "user/user_menu.html" %}
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/portal.css') }}">
+<div class="container">
+<h3>Create a Flashcard Set</h3>
 <a href="/flashcard">Back</a>
 <form method="POST" novalidate>
     {{ form.hidden_tag() }}
@@ -9,4 +12,5 @@
 
     <p>{{ form.submit() }}</p>
 </form>
+</div>
 {% endblock %}

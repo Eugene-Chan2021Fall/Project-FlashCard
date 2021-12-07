@@ -1,20 +1,42 @@
 {% extends "user/user_menu.html" %}
 {% block content %}
-<h3>{{ name }}</h3>
-<a href="/flashcard">Back</a>
-<a href="/flashcard/add/{{ name }}-{{ id }}">Add flashcards</a>
-<a href="/flashcard/delete/{{ name }}-{{ id }}">Remove flashcards</a>
-<a href="/flashcard/edit/{{ name }}-{{ id }}">Edit flashcards</a>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/portal.css') }}">
 
+<ul class="nav justify-content-center">
+    <li class="nav-item">
+      <a class="btn btn-light" href="/flashcard" role="button">Back</a>
+    </li>
+  <li class="nav-item">
+    <a class="btn btn-light" href="/flashcard/add/{{ name }}-{{ id }}" role="button">Add flashcards</a>
+  </li>
+  <li class="nav-item">
+    <a class="btn btn-light" href="/flashcard/delete/{{ name }}-{{ id }}" role="button">Delete Flashcards</a>
+  </li>
+  <li class="nav-item">
+    <a class="btn btn-light" href="/flashcard/edit/{{ name }}-{{ id }}" role="button">Rename a Flashcard</a>
+  </li>
+</ul>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h3><h3>{{ name }}</h3></h3>
+      <ul>
+          {% for cards in list %}
+              {{ cards }}
+          {% endfor %}
+      </ul>
+    </div>
+    <div>
+        <button onclick="window.print();"> Print </h4>
+    </div>
+  </div>
+</div>
 <ul>
-{% for cards in list %}
-    <li>{{ cards }}</li>
-{% endfor %}
+
 
 </ul>
 
 <!-- Button for print or make it pdf -->
-<div>
-    <button onclick="window.print();"> Print </h4>
-</div>
+
 {% endblock %}

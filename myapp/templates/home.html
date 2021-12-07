@@ -1,50 +1,166 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
-  <div class="row">
-    <div class="col-6" allign="center">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          </div>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-                <h3>Welcome to Study Helper!</h3>
-                    <p>If you want to use Study Helper head to our Login or Sign up page.</p>
-                <a class="btn btn-outline-primary" href="/login" role="button">Login</a>
-                <a class="btn btn-outline-primary" href="/signup" role="button">Sign up</a>
-            </div>
-            <div class="carousel-item">
-                <h3>What is study helper?</h3>
-                <p>Study helper is an app designed to help students <br> study effectively!</p>
-                <br>
-            </div>
-            <div class="carousel-item">
-              <h3>App developed by students from SJSU!</h3>
-              <p>As fellow students we aim to promote learning for all.</p>
+    <div class="row justify-content-cente">
+        <div class="col-6" allign="center">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <h3>Welcome to Study Helper!</h3>
+                            <p>If you want to use Study Helper head to our Login or Sign up page.</p>
+                        <a class="btn btn-light" href="/login" role="button">Login</a>
+                        <a class="btn btn-light" href="/signup" role="button">Sign up</a>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="carousel-item">
+                        <h3>What is study helper?</h3>
+                        <p>Study helper is an app designed to help students <br> study effectively!</p>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="carousel-item">
+                      <h3>App developed by students from SJSU!</h3>
+                      <p>As fellow students we aim to promote learning for all.</p>
 
-              <p>Want to see our work? Visit our&nbsp<a href="https://github.com/Eugene-Chan2021Fall/Project-FlashCard">Github</a>.</p>
-
-            <br>
+                      <p>Want to see our work? Visit our&nbsp<a href="https://github.com/Eugene-Chan2021Fall/Project-FlashCard">Github</a>.</p>
+                      <br>
+                    <br>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                 </button>
             </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+        </div>
+        <div class="col-4 offset-md-1 justify-content-center">
+            <h4>A brand new studying app designed by students for students.</h4>
         </div>
     </div>
-  </div>
-  <div class="row">
-      <p>New Row</p>
+    <div class="row justify-content-center">
+        <div class="col">
+            <div class="d-flex justify-content-center">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <font size="+4">Pricing</font>
+                        <br>
+                        <br>
+                        <font class="card-subtitle mb-2 text-muted" size="+7">$0.</font>
+                        <br>
+                        <br>
+                        <p class="card-text">We charge nothing but free around here.</p>
 
-  </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <h3>Why is it free?</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5">
+            <h4> &nbsp;  &nbsp; Because we said so!</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+              <img src="{{ url_for('static', filename='studyhelper') }}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Flashcards!</h5>
+                <p class="card-text">Students can make their own flashcards on their own or import markdown files.</p>
+              </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+              <img src="{{ url_for('static', filename='studyhelper2.png') }}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Pomodoro Timer!</h5>
+                <p class="card-text">Allows students to study using the pomodoro technique.</p>
+              </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ url_for('static', filename='studyhelper3.png') }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">Todo-Tracker!</h5>
+                <p class="card-text">Stay organized by keeping track of tasks.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ url_for('static', filename='studyhelper4.png') }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">Markdown Files to Notes</h5>
+                <p class="card-text">Upload and covert markdown files to notes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <br>
+            <h3>"I love using flashcards."</h3>
+        </div>
+        <div class="col-sm">
+            <h3>"A refreshing way to study!"</h3>
+        </div>
+        <div class="col-sm">
+            <br>
+            <br>
+            <h3>"Now I can upload all my notes to one place."</h3>
+        </div>
+    </div>
+    <div class="row">
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm" allign="center">
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="{{ url_for('static', filename='python.png') }}" alt="Card image cap">
+              <div class="card-body">
+                <br>
+                <p class="card-text">Powered by python.</p>
+              </div>
+            </div>
+        </div>
+        <div class="col-sm" allign="center">
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="{{ url_for('static', filename='flask.png') }}" alt="Card image cap">
+              <div class="card-body">
+                <br>
+                <p class="card-text">Developed using flask framework.</p>
+              </div>
+            </div>
+        </div>
+        <div class="col-sm" allign="center">
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="{{ url_for('static', filename='bootstrap.png') }}" alt="Card image cap">
+              <div class="card-body">
+                <p class="card-text">Front end framework.</p>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <h3>Want to help? Contact us at (123)-456-7890.</h3>
+    </div>
 </div>
 
 

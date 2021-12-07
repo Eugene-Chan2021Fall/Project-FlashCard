@@ -1,6 +1,10 @@
 {% extends "user/user_menu.html" %}
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/portal.css') }}">
+<div class="container">
+<h3>Rename Task</h3>
 <a href="/todo-tracker">Back</a>
+
 
 <form method="POST" novalidate>
 {{ form.csrf_token }}
@@ -12,5 +16,5 @@
 
 <p>{{ form.submit() }}</p>
 </form>
-
+</div>
 {% endblock %}

@@ -1,4 +1,59 @@
 {% extends "user/user_menu.html" %}
 {% block content %}
+
+
+<div class="container">
     <h1>Welcome {{ name }}!</h1>
+    <div class="user-home">
+    <div class="row">
+
+        <div class="col-4">
+            <h3>Getting Started:</h3>
+            <ul>
+            <li><p>Explore the app using the nav bar at the top of the screen.</p></li>
+            <li><p>Make sure to start your study timer before a study session to keep track of your hours.</p</li>
+            <li><p>Hours will be tracked using the study timer and can be seen in the my stats page under
+                the account tab.</p></li>
+            <li><p>Remember, keeping track of your work is an important part of being a student.</p></li>
+            </ul>
+        </div>
+        <div class="col">
+            <div class="d-flex justify-content-end">
+
+                <ul>
+                <h3>Reporting bugs</h3>
+                <li><p>Bugs can be reported to our Github under the issues tab.</p></li>
+                <li><p>For issues you can email us at studyhelper@gmail.com</p></li>
+                <li><p>For customer support you can reach us at our number (123)-456-7890.</p></li>
+                <li><p>Thank you for using Study Helper!</p></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <h3>Starting Tasks:</h3>
+            <ul>
+                <li><p>To get yourself started try making a Flashcard Set.</li>
+                <li><p>Add some tasks that you plan on doing in the future.</p></li>
+                <li><p>Take notes and upload them to your account.</p></li>
+                <li><p>Finish your day with an intense pomodoro session.</p></li>
+            </ul>
+        </div>
+        <div class="col offset-md-3">
+            <img src="{{ url_for('static', filename='icon.png') }}" class="img-fluid" alt="Responsive image">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <h3>Deleting Account:</h3>
+            <ul>
+                <li><p>To delete your account head over to the account tab and press DELETE ACCOUNT.</li>
+                <li><p>WARNING: this action cannot be reverted and all data will be lost.</p></li>
+            </ul>
+        </div>
+    </div>
+    </div>
+</div>
 {% endblock %}

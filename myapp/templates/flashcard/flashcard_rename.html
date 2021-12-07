@@ -1,16 +1,20 @@
 {% extends "user/user_menu.html" %}
 {% block content %}
-<a href="/flashcard">Back</a>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/portal.css') }}">
 
-<form method="POST" novalidate>
-{{ form.csrf_token }}
-<p> {{ form.select.label }} <br>
-{{ form.select(size=10) }}</p>
 
-<p> {{ form.name.label }} <br>
-{{ form.name(size=32) }}</p>
+<div class="container">
+    <h3>Rename a Flashcard set</h3>
+    <a href="/flashcard">Back</a>
+    <form method="POST" novalidate>
+    {{ form.csrf_token }}
+    <p> {{ form.select.label }} <br>
+    {{ form.select(size=10) }}</p>
 
-<p>{{ form.submit() }}</p>
-</form>
+    <p> {{ form.name.label }} <br>
+    {{ form.name(size=32) }}</p>
 
+    <p>{{ form.submit() }}</p>
+    </form>
+</div>
 {% endblock %}

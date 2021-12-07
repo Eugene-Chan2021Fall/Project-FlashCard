@@ -309,7 +309,6 @@ def create_sets():
     '''
     form = FlashcardForm()
     user = current_user.get_id()
-    flash(f'Debug User Id: {user}')
     if form.validate_on_submit():
         set = Flashcardset(name = form.name.data, author_id = current_user.get_id())
         db.session.add(set)
@@ -431,7 +430,7 @@ def flashcard_share():
         if checkName is None:
             flash('User not found.')
         elif form.select.data is None:
-            flash('Pick a set')
+            return render_template('/flashcard/flashcard_share.html', form=form)
         else:
             flashcard = Flashcardset.query.get(form.select.data)
             share = Flashcardshare(target = form.target.data, flashcard_id = form.select.data, flashcard_name = flashcard.name)
@@ -648,7 +647,7 @@ def notes_share():
         if checkName is None:
             flash('User not found.')
         elif form.select.data is None:
-            flash('Pick a set')
+            return render_template('notes/notes_share.html', form=form)
         else:
             note = Note.query.get(form.select.data)
             share = Noteshare(target = form.target.data, note_id = form.select.data, note_name = note.name)

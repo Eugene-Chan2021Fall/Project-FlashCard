@@ -1,7 +1,9 @@
 {% extends "user/user_menu.html" %}
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/portal.css') }}">
+<div class="container">
+<h3>Remove Task</h3>
 <a href="/todo-tracker">Back</a>
-<h6>For now remove cards by their id. Drop down menu will come in the future.</h6>
 
 <form method="POST" novalidate>
 {{ form.csrf_token }}
@@ -10,4 +12,5 @@
 
 <p>{{ form.submit() }}</p>
 </form>
+</div>
 {% endblock %}

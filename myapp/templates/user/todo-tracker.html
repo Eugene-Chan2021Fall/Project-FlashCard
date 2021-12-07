@@ -1,20 +1,33 @@
 {% extends "user/user_menu.html" %}
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/portal.css') }}">
 
-<form method="POST" novalidate>
-{{ add_form.csrf_token }}
-<p> {{ add_form.task.label }} <br>
-{{ add_form.task(size=32) }}</p>
-
-<p>{{ add_form.submit() }}</p>
-</form>
-<a href="/todo-tracker/delete">Delete Task</a>
-<a href="/todo-tracker/rename">Edit Task</a>
-<ul>
-{% for tasks in list %}
-    <li>{{ tasks }}</li>
-
-{% endfor %}
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="btn btn-light" href="/todo-tracker/delete" role="button">Delete Task</a>
+  </li>
+  <li class="nav-item">
+    <a class="btn btn-light" href="/todo-tracker/rename" role="button">Rename Task</a>
+  </li>
 </ul>
+<div class="container">
+    <form method="POST" novalidate>
+    {{ add_form.csrf_token }}
+    <p> {{ add_form.task.label }} <br>
+    {{ add_form.task(size=32) }}</p>
 
+    <p>{{ add_form.submit() }}</p>
+    </form>
+
+    <div class="row">
+        <div class="col-8">
+            <h3>Tasks:</h3>
+            <div class="space">
+                {% for tasks in list %}
+                    <li>{{ tasks }}</li>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,5 +1,9 @@
 {% extends "user/user_menu.html" %}
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/portal.css') }}">
+<div class="container">
+    <div class="row">
+        <div class="col-3">
     <p><br>Total Study Time Using Timer</p>
     <p>{{ hours_tracked }}</p>
 
@@ -8,4 +12,7 @@
     <p>Golden Stars: {{ num }}</p>
     <p>-----------------------------------------------------------------------</p>
     <p style="color:yellow;">{{ golden_stars }}</p>
+        </div>
+    </div>
+</div>
 {% endblock %}

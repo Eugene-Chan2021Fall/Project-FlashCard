@@ -1,29 +1,53 @@
 {% extends "user/user_menu.html" %}
 {% block content %}
 
-<a href="/flashcard/create">Create a Flashcard Set</a>
-<a href="/flashcard/delete">Delete Flashcard Set</a>
-<a href="/flashcard/upload">Upload a Flashcard Set</a>
-<a href="/flashcard/rename">Edit Flashcard Sets</a>
-<a href="/flashcard/share">Share Flashcard Sets</a>
-<p>My Flashcards</p>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/portal.css') }}">
 
-<ul>
-{% for cards in flashcards %}
-    <a href="/flashcard/display/{{ cards.name }}-{{ cards.id }}">{{ cards }}</a>
-
-{% endfor %}
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="btn btn-light" href="/flashcard/create" role="button">Create a Flashcard Set</a>
+  </li>
+  <li class="nav-item">
+    <a class="btn btn-light" href="/flashcard/delete" role="button">Delete a Flashcard Set</a>
+  </li>
+  <li class="nav-item">
+    <a class="btn btn-light" href="/flashcard/upload" role="button">Upload a Flashcard Set</a>
+  </li>
+  <li class="nav-item">
+    <a class="btn btn-light" href="/flashcard/rename" role="button">Rename a Flashcard Set</a>
+  </li>
+  <li class="nav-item">
+    <a class="btn btn-light" href="/flashcard/share" role="button">Share a Flashcard Set</a>
+  </li>
 </ul>
 
-<p>Shared with me:</p>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <h3>My Flashcards:</h3>
+      <ul>
+      {% for cards in flashcards %}
+          <a href="/flashcard/display/{{ cards.name }}-{{ cards.id }}">{{ cards }}</a>
 
-<ul>
-{% for cards in share_list %}
-    <li>
-        <a href="/flashcard/display/{{ cards.flashcard_name }}-{{ cards.flashcard_id }}">{{ cards }}</a>
-    </li>
+      {% endfor %}
+      </ul>
+    </div>
+    <div class ="col-sm">
+        <h3>Shared with me:</h3>
+        <ul>
+        {% for cards in share_list %}
+            <li>
+                <a href="/flashcard/display/{{ cards.flashcard_name }}-{{ cards.flashcard_id }}">{{ cards }}</a>
+            </li>
 
-{% endfor %}
-</ul>
+        {% endfor %}
+        </ul>
+  </div>
+  </div>
+</div>
+
+
+
+
 
 {% endblock %}

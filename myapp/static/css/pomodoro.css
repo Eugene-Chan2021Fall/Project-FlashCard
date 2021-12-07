@@ -1,23 +1,32 @@
 .clock {
+
     display: block;
     text-align: center;
     align-items: center;
 }
 
 .work-timer{
+    padding: 5px;
     background-color: white;
-}
-.work-timer p{
     display: inline-block;
 }
+.work-timer p{
+    display: inline;
+}
 
-.counter {
-    text-align: center;
+.counter h3{
+    padding: 5px;
     display : inline;
+}
+.counter p{
+    padding: 5px;
+    display :inline-block;
 }
 
 .brk-timer{
+    padding: 5px;
     background-color: white;
+    display: inline-block;
 }
 
 .brk-timer p{
@@ -25,6 +34,6 @@
 }
 
 .btn{
-    margin-top: 10px;
+    margin: 10px;
     display : inline;
 }

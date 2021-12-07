@@ -1,0 +1,34 @@
+.nav {
+    padding: 20px;
+}
+.nav .nav-item {
+    padding: 5px;
+}
+
+.col-8 {
+    margin: 10px;
+    background-color: white;
+}
+
+.col-sm {
+    margin: 10px;
+    background-color: white;
+}
+
+a {
+    padding: 20px;
+}
+
+
+.background {
+    background-color: white;
+    padding: 3px;
+}
+
+.col-1 {
+    margin: 10px;
+    background-color: white;
+}
+.space {
+    margin: 20px;
+}
