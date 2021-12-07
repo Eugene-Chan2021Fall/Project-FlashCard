@@ -118,7 +118,7 @@ class HoursTracked(UserMixin, db.Model):
         mins = time // 60
         time %= 60
         secs = time
-        return f'ID: {self.id} |Days: {day} Hours: {hour} Mins: {mins} Secs: {secs}'
+        return f'|Days: {day} Hours: {hour} Mins: {mins} Secs: {secs}|'
 
 
 
@@ -155,7 +155,7 @@ class Flashcardset(UserMixin, db.Model):
     cards = db.relationship('Card', backref='set', lazy=True)
 
     def __repr__(self):
-        return f'Id: {self.id} |{self.name}|'
+        return f'|{self.name}|'
 
 
 class Card(UserMixin, db.Model):
@@ -186,7 +186,7 @@ class Card(UserMixin, db.Model):
     set_id = db.Column(db.Integer, db.ForeignKey('flashcardset.id'))
 
     def __repr__(self):
-        return f'Id: {self.id} [{self.front}, {self.back}]'
+        return f'[{self.front}, {self.back}]'
 
 class Flashcardshare(UserMixin, db.Model):
     '''
@@ -220,7 +220,7 @@ class Flashcardshare(UserMixin, db.Model):
     def __repr__(self):
         flashcard = Flashcardset.query.get(self.flashcard_id)
         if flashcard is not None:
-            return f'Id: {flashcard.id} |{flashcard.name}|'
+            return f'|{flashcard.name}|'
         else:
             return None
 
@@ -252,7 +252,7 @@ class Task(UserMixin, db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return f'Id: {self.id} |{self.task}|'
+        return f'|{self.task}|'
 
 #-------------------------------------------------------------------------------
 #Notes
@@ -284,7 +284,7 @@ class Note(UserMixin, db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return f'Id: {self.id} |{self.name}|'
+        return f'|{self.name}|'
 
 class Noteshare(UserMixin, db.Model):
     '''
@@ -314,7 +314,7 @@ class Noteshare(UserMixin, db.Model):
     target = db.Column(db.Integer)
 
     def __repr__(self):
-        return f'Id: {self.note_id} |{self.note_name}|'
+        return f'|{self.note_name}|'
 
 @login.user_loader
 def load_user(id):

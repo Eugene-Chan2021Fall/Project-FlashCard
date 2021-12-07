@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -17,6 +18,41 @@
         {% endif %}
     <!--Flashed Messages-->
 	{% with messages = get_flashed_messages() %}
+=======
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <title>Study Helper</title>
+  </head>
+  <body>
+
+    <!--User Menu-->
+    {% if current_user.is_authenticated %}
+        {% block menu %}
+        {% endblock %}
+    <!--Splash Page-->
+    {% else %}
+    <!--Navbar-->
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand">Study Helper</a>
+        <div class="signup-login">
+            <a class="btn btn-outline-primary" href="/login" role="button">Login</a>
+            <a class="btn btn-outline-primary" href="/signup" role="button">Sign up</a>
+        </div>
+      </div>
+    </nav>
+    {% endif %}
+      <!--Flashed Messages-->
+    {% with messages = get_flashed_messages() %}
+>>>>>>> d068f13c605c8a599b03c5d5b1bd0e60268e1a39
         {% if messages %}
         <ul>
             {% for m in messages %}
@@ -24,19 +60,21 @@
             {% endfor %}
         </ul>
         {% endif %}
-        {% endwith %}
+    {% endwith %}
+
     <!--Webpage Content-->
-	{% block content %}
-	{% endblock %}
-    <!--adding Search textboxes-->
-    <div class="search">
-        <form class="form-inline my-2 my-lg-0" method="GET">
-            <input class="form-control mr-sm-2"
-            type="search" placeholder="Search" name="q">
-            <button class="btn btn-outline-success my-2 my-sm-0"
-            type="submit">Search</button>
-        </form>
-    </div>
-  
-    </body>
+    {% block content %}
+    {% endblock %}
+
+    <footer class="bg-light text-center text-lg-start">
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: white;">
+        © 2021 Copyright:
+        <a class="text-dark" href="/">studyhelper.com</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
 </html>
